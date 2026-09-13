@@ -1,6 +1,6 @@
 # BasketMap
 
-Live site: https://basketmap.rufina-sharad.chatgpt.site
+Live project: https://sharad.fr/projects/basketmap/
 
 BasketMap is a focused grocery-price comparison product for Lyon and Paris.
 Visitors choose a city, build a basket, compare complete totals across real
@@ -89,9 +89,15 @@ commercial feeds.
 
 ## Deployment
 
-The existing Sites registration is stored in `.openai/hosting.json`. Preserve
-its project ID and deploy compiled `dist` assets to the existing BasketMap site;
-do not create a second site.
+GitHub Actions publishes a combined GitHub Pages site:
+
+- `https://sharad.fr/` contains the personal projects homepage from `site/`.
+- `https://sharad.fr/projects/basketmap/` contains the Vite application.
+
+The workflow builds BasketMap with `BASKETMAP_BASE_PATH` so assets, client-side
+navigation, downloads, and data requests work beneath the nested URL. The
+existing Sites registration remains in `.openai/hosting.json` as historical
+deployment metadata.
 
 ## Licence
 

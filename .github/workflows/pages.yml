@@ -1,0 +1,59 @@
+name: Deploy sharad.fr
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test -- --run
+      - run: npm run build
+        env:
+          BASKETMAP_BASE_PATH: /projects/basketmap/
+
+      - name: Assemble sharad.fr
+        run: |
+          mkdir -p _site/projects/basketmap/shop _site/projects/basketmap/results
+          cp -R site/. _site/
+          cp -R dist/. _site/projects/basketmap/
+          cp dist/index.html _site/projects/basketmap/shop/index.html
+          cp dist/index.html _site/projects/basketmap/results/index.html
+          touch _site/.nojekyll
+          printf 'sharad.fr\n' > _site/CNAME
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

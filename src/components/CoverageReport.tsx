@@ -1,4 +1,5 @@
 import report from "../data/coverage.json";
+import { appPath } from "../base";
 export default function CoverageReport() {
   return (
     <div className="coverage-summary">
@@ -35,7 +36,7 @@ export default function CoverageReport() {
           Exact source query ↗
         </a>{" "}
         ·{" "}
-        <a href="/data/open-prices-coverage.json" download>
+        <a href={appPath("/data/open-prices-coverage.json")} download>
           Download coverage report
         </a>
       </p>

@@ -58,6 +58,7 @@ import {
   searchScore,
   visibleAliases,
 } from "./services/shopping";
+import { appPath, relativeAppPath } from "./base";
 const normalize = (s: string) =>
   s
     .normalize("NFD")
@@ -71,9 +72,9 @@ const shortDate = (date: string) =>
   }).format(new Date(`${date}T12:00:00Z`));
 type AppView = "home" | "shop" | "results";
 const viewPath = (view: AppView) =>
-  view === "home" ? "/" : `/${view}`;
+  appPath(view === "home" ? "/" : `/${view}`);
 const viewFromPath = (): AppView => {
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const path = relativeAppPath().replace(/\/+$/, "") || "/";
   if (path === "/shop") return "shop";
   if (path === "/results") return "results";
   return "home";
@@ -311,7 +312,7 @@ export default function App() {
   }
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/data/france-market.json", { signal: controller.signal })
+    fetch(appPath("/data/france-market.json"), { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw Error();
         return r.json();
@@ -593,7 +594,7 @@ export default function App() {
       <header className="site-header">
         <div className="header-inner">
           <a
-            href="/"
+            href={viewPath("home")}
             className="brand"
             onClick={(e) => {
               e.preventDefault();
@@ -663,7 +664,7 @@ export default function App() {
                 </p>
                 <a
                   className="primary hero-link"
-                  href="/shop"
+                  href={viewPath("shop")}
                   onClick={(event) => {
                     event.preventDefault();
                     navigate("shop");
@@ -1281,7 +1282,7 @@ export default function App() {
         <div className="footer-signature">
           <a
             className="footer-brand"
-            href="/"
+            href={viewPath("home")}
             onClick={(event) => {
               event.preventDefault();
               navigate("home");
@@ -1315,7 +1316,7 @@ export default function App() {
           >
             © OpenStreetMap
           </a>
-          <a href="/licenses.txt">Licences</a>
+          <a href={appPath("/licenses.txt")}>Licences</a>
         </div>
       </footer>
       <div
