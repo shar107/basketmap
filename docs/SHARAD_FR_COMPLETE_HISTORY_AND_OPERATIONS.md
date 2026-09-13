@@ -10,7 +10,7 @@
 
 **Production homepage:** `https://sharad.fr/`
 
-**Production BasketMap application:** `https://sharad.fr/projects/basketmap/`
+**Production BasketMap application:** `https://basketmap.sharad.fr/`
 
 **Current hosting provider:** GitHub Pages
 
@@ -21,6 +21,12 @@
 **Licence:** MIT
 
 ---
+
+> **Architecture update — 13 September 2026:** Sharad.fr and BasketMap now have
+> independent repositories and deployments. `shar107/sharad-fr` serves the
+> portfolio at `sharad.fr`; this repository serves BasketMap at
+> `basketmap.sharad.fr`. Sections below describing the former combined build
+> are retained as historical context.
 
 ## 1. Purpose of this document
 

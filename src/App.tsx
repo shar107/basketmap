@@ -52,7 +52,6 @@ import MapPanel from "./components/MapPanel";
 import {
   bestSharedBasket,
   candidateCoverage,
-  ESSENTIALS,
   essentialType,
   productImageMap,
   searchScore,
@@ -879,7 +878,7 @@ export default function App() {
                   <Search size={21} />
                   <input
                     aria-label="Search products"
-                    placeholder="Try milk, pasta, coffee… or a barcode"
+                    placeholder="Search recorded products or enter a barcode"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
@@ -892,25 +891,11 @@ export default function App() {
                     </button>
                   )}
                 </div>
-                <div className="essential-shortcuts" aria-label="Find essentials">
-                  <span>Essentials</span>
-                  {ESSENTIALS.slice(0, 8).map((essential) => (
-                    <button
-                      key={essential.name}
-                      aria-pressed={
-                        normalize(search) ===
-                        normalize(essential.words[0] as string)
-                      }
-                      onClick={() => setSearch(essential.words[0] as string)}
-                    >
-                      {essential.name}
-                    </button>
-                  ))}
-                </div>
                 <p className="catalog-explanation">
-                  Add any recorded product. If stores do not share every item,
-                  BasketMap compares the largest shared part of your basket and
-                  lists store-specific products separately.
+                  Search the products that have recent prices near {place.label}.
+                  If stores do not share every item, BasketMap compares the
+                  largest shared part of your basket and lists store-specific
+                  products separately.
                 </p>
                 {browseStore && (
                   <div className="service-notice store-filter-notice">

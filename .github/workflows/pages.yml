@@ -1,4 +1,4 @@
-name: Deploy sharad.fr
+name: Deploy BasketMap
 
 on:
   push:
@@ -24,33 +24,24 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            portfolio/package-lock.json
 
       - run: npm ci
       - run: npm run typecheck
       - run: npm run test -- --run
+      - run: npm run validate:data
       - run: npm run build
-        env:
-          BASKETMAP_BASE_PATH: /projects/basketmap/
-      - run: npm ci --prefix portfolio
-      - run: npm run build --prefix portfolio
 
-      - name: Assemble sharad.fr
+      - name: Add route fallbacks
         run: |
-          mkdir -p _site/projects/basketmap/shop _site/projects/basketmap/results
-          cp -R portfolio/dist/. _site/
-          cp -R dist/. _site/projects/basketmap/
-          cp dist/index.html _site/projects/basketmap/shop/index.html
-          cp dist/index.html _site/projects/basketmap/results/index.html
-          touch _site/.nojekyll
-          printf 'sharad.fr\n' > _site/CNAME
+          mkdir -p dist/shop dist/results
+          cp dist/index.html dist/shop/index.html
+          cp dist/index.html dist/results/index.html
+          touch dist/.nojekyll
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     environment:

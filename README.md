@@ -1,24 +1,16 @@
-# sharad.fr and BasketMap
+# BasketMap
 
-Personal site: https://sharad.fr/
+Live project: https://basketmap.sharad.fr/
 
-Live project: https://sharad.fr/projects/basketmap/
-
-Complete domain, DNS, GitHub Pages, deployment, and maintenance history:
-[docs/SHARAD_FR_COMPLETE_HISTORY_AND_OPERATIONS.md](docs/SHARAD_FR_COMPLETE_HISTORY_AND_OPERATIONS.md)
-
-The repository contains two independently built frontends:
-
-- `portfolio/` is the Astro personal site published at the domain root.
-- the repository root is the React/Vite BasketMap application published at
-  `/projects/basketmap/`.
+Personal site repository:
+[`shar107/sharad-fr`](https://github.com/shar107/sharad-fr)
 
 BasketMap is a focused grocery-price comparison product for Lyon and Paris.
 Visitors choose a city, build a basket, compare complete totals across real
 supermarket branches, and then shop directly at the selected store.
 
-The current bootstrap contains 2,275 valid source-linked price observations,
-2,006 exact products, and 25 priced branches within 15 km of Lyon or Paris.
+The current bootstrap contains 2,270 valid source-linked price observations,
+2,002 exact products, and 25 priced branches within 15 km of Lyon or Paris.
 BasketMap requests newer Open Prices records when it opens and retains this
 bundled snapshot as an availability fallback. Prices are community-observed
 regular in-store records from the preceding 30 days; they are not live shelf
@@ -37,10 +29,10 @@ inventory, and coverage and stock are not guaranteed.
 - The catalog is a separate `/shop` view. Visitors must choose “Start your
   shopping list” before product search and basket-building controls appear.
 - Exact branded products remain searchable by name or barcode.
-- Comparable essentials group real products only when their type and displayed
-  pack size match. Each branch uses one explicitly selected source product and
-  retains its original product label, observation date, barcode, and evidence
-  link.
+- Comparable product groupings use real products only when their type and
+  displayed pack size match. Each branch uses one explicitly selected source
+  product and retains its original product label, observation date, barcode,
+  and evidence link.
 - Any recorded product can be added directly. Products show whether they are
   shared across stores or may need to be listed separately.
 - When no two stores can price the full basket, BasketMap automatically totals
@@ -100,16 +92,14 @@ commercial feeds.
 
 ## Deployment
 
-GitHub Actions publishes a combined GitHub Pages site:
+GitHub Actions validates and builds BasketMap, adds static fallbacks for
+`/shop/` and `/results/`, and deploys the `dist/` directory directly to GitHub
+Pages. The custom domain is `basketmap.sharad.fr`.
 
-- `https://sharad.fr/` contains the Astro portfolio from `portfolio/`.
-- `https://sharad.fr/projects/basketmap/` contains the Vite application.
-
-The workflow builds both applications, copies the portfolio to the deployment
-root, and then copies BasketMap into its nested project directory. BasketMap is
-built with `BASKETMAP_BASE_PATH` so assets, client-side navigation, downloads,
-and data requests work beneath that URL. The existing Sites registration
-remains in `.openai/hosting.json` as historical deployment metadata.
+The personal site is maintained independently in `shar107/sharad-fr`; changes
+to either repository no longer rebuild the other. The existing Sites
+registration remains in `.openai/hosting.json` as historical deployment
+metadata.
 
 ## Licence
 

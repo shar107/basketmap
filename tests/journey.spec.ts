@@ -199,6 +199,11 @@ test("store-specific products are added directly and excluded from shared totals
 test("milk search returns milk rather than milk chocolate", async ({ page }) => {
   await page.goto("/shop");
   const search = page.getByRole("textbox", { name: "Search products" });
+  await expect(page.getByLabel("Find essentials")).toHaveCount(0);
+  await expect(search).toHaveAttribute(
+    "placeholder",
+    "Search recorded products or enter a barcode",
+  );
   await search.fill("milk");
   await expect(page.locator(".shopping-main")).toContainText(
     "No matching product prices yet",
