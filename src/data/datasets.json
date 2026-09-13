@@ -1,0 +1,9 @@
+[
+  {
+    "id": "basketmap-demo",
+    "version": "demo-v1",
+    "mode": "demo",
+    "title": "Interactive demo",
+    "available": true
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "package": "react",
+    "version": "19.3.0",
+    "license": "MIT",
+    "file": "react-LICENSE.txt"
+  },
+  {
+    "package": "react-dom",
+    "version": "19.3.0",
+    "license": "MIT",
+    "file": "react-dom-LICENSE.txt"
+  },
+  {
+    "package": "leaflet",
+    "version": "1.9.4",
+    "license": "BSD-2-Clause",
+    "file": "leaflet-LICENSE.txt"
+  },
+  {
+    "package": "zod",
+    "version": "4.6.2",
+    "license": "MIT",
+    "file": "zod-LICENSE.txt"
+  },
+  {
+    "package": "lucide-react",
+    "version": "1.45.0",
+    "license": "ISC",
+    "file": "lucide-react-LICENSE.txt"
+  },
+  {
+    "package": "scheduler",
+    "version": "0.28.0",
+    "license": "MIT",
+    "file": "scheduler-LICENSE.txt"
+  }
+]

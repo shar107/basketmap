@@ -1,0 +1,3170 @@
+{
+  "schemaVersion": 1,
+  "id": "basketmap-demo",
+  "version": "demo-v1",
+  "mode": "demo",
+  "title": "Interactive demo",
+  "createdAt": "2026-09-12T19:40:30Z",
+  "description": "Fictional stores and fixed example prices near Bastille. These values demonstrate basket comparison; they are not real grocery prices or evidence of savings.",
+  "sources": [
+    {
+      "name": "BasketMap original synthetic fixture",
+      "url": "#/data",
+      "license": "CC0-1.0"
+    }
+  ],
+  "stores": [
+    {
+      "id": "demo-a",
+      "name": "Demo Store A · Nearby",
+      "lat": 48.854,
+      "lon": 2.37,
+      "chain": null,
+      "address": "Illustrative location near Bastille, Paris",
+      "fictional": true,
+      "sourceUrl": null,
+      "osm": null
+    },
+    {
+      "id": "demo-b",
+      "name": "Demo Store B · Market",
+      "lat": 48.859,
+      "lon": 2.379,
+      "chain": null,
+      "address": "Illustrative location near Bastille, Paris",
+      "fictional": true,
+      "sourceUrl": null,
+      "osm": null
+    },
+    {
+      "id": "demo-c",
+      "name": "Demo Store C · Pantry",
+      "lat": 48.846,
+      "lon": 2.377,
+      "chain": null,
+      "address": "Illustrative location near Bastille, Paris",
+      "fictional": true,
+      "sourceUrl": null,
+      "osm": null
+    },
+    {
+      "id": "demo-d",
+      "name": "Demo Store D · Corner",
+      "lat": 48.851,
+      "lon": 2.36,
+      "chain": null,
+      "address": "Illustrative location near Bastille, Paris",
+      "fictional": true,
+      "sourceUrl": null,
+      "osm": null
+    }
+  ],
+  "items": [
+    {
+      "id": "milk",
+      "name": "Semi-skimmed UHT milk",
+      "category": "Dairy and eggs",
+      "aliases": [
+        "lait",
+        "milk"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "requiredAttributes": [
+        "semi-skimmed",
+        "UHT",
+        "dairy"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "yogurt",
+      "name": "Plain yogurt",
+      "category": "Dairy and eggs",
+      "aliases": [
+        "yaourt",
+        "yoghurt"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "4 × 125 g",
+      "requiredAttributes": [
+        "plain",
+        "dairy",
+        "four pots"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "butter",
+      "name": "Butter",
+      "category": "Dairy and eggs",
+      "aliases": [
+        "beurre"
+      ],
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "requiredAttributes": [
+        "dairy butter"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "eggs",
+      "name": "Medium free-range eggs",
+      "category": "Dairy and eggs",
+      "aliases": [
+        "oeufs",
+        "œufs",
+        "egg"
+      ],
+      "packQuantity": 6,
+      "packUnit": "count",
+      "packLabel": "6-pack",
+      "requiredAttributes": [
+        "medium",
+        "free-range"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "spaghetti",
+      "name": "Spaghetti",
+      "category": "Grains and bread",
+      "aliases": [
+        "pâtes",
+        "pates",
+        "pasta"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "durum wheat",
+        "dried spaghetti"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "rice",
+      "name": "White rice",
+      "category": "Grains and bread",
+      "aliases": [
+        "riz"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "requiredAttributes": [
+        "white rice"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "oats",
+      "name": "Rolled oats",
+      "category": "Grains and bread",
+      "aliases": [
+        "avoine",
+        "porridge"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "rolled oats"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "couscous",
+      "name": "Wheat couscous",
+      "category": "Grains and bread",
+      "aliases": [
+        "semoule"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "wheat couscous"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "bread",
+      "name": "Sliced wholemeal bread",
+      "category": "Grains and bread",
+      "aliases": [
+        "pain",
+        "pain complet"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "wholemeal",
+        "sliced"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "tomatoes",
+      "name": "Chopped tomatoes",
+      "category": "Tins and jars",
+      "aliases": [
+        "tomates",
+        "tomates concassées"
+      ],
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g",
+      "requiredAttributes": [
+        "chopped",
+        "tinned"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "chickpeas",
+      "name": "Cooked chickpeas",
+      "category": "Tins and jars",
+      "aliases": [
+        "pois chiches"
+      ],
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "requiredAttributes": [
+        "cooked chickpeas",
+        "net weight"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "lentils",
+      "name": "Cooked lentils",
+      "category": "Tins and jars",
+      "aliases": [
+        "lentilles"
+      ],
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "requiredAttributes": [
+        "cooked lentils",
+        "net weight"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "passata",
+      "name": "Tomato passata",
+      "category": "Tins and jars",
+      "aliases": [
+        "coulis",
+        "purée de tomate"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "tomato passata"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "apples",
+      "name": "Apples",
+      "category": "Produce",
+      "aliases": [
+        "pommes"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "requiredAttributes": [
+        "apples",
+        "bagged"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "bananas",
+      "name": "Bananas",
+      "category": "Produce",
+      "aliases": [
+        "bananes"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg pack",
+      "requiredAttributes": [
+        "bananas",
+        "packaged"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "carrots",
+      "name": "Carrots",
+      "category": "Produce",
+      "aliases": [
+        "carottes"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "requiredAttributes": [
+        "carrots",
+        "bagged"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "potatoes",
+      "name": "Potatoes",
+      "category": "Produce",
+      "aliases": [
+        "pommes de terre"
+      ],
+      "packQuantity": 2000,
+      "packUnit": "g",
+      "packLabel": "2 kg bag",
+      "requiredAttributes": [
+        "potatoes",
+        "bagged"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "onions",
+      "name": "Onions",
+      "category": "Produce",
+      "aliases": [
+        "oignons"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "requiredAttributes": [
+        "onions",
+        "bagged"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "tofu",
+      "name": "Plain firm tofu",
+      "category": "Protein and frozen",
+      "aliases": [
+        "tofu nature"
+      ],
+      "packQuantity": 200,
+      "packUnit": "g",
+      "packLabel": "200 g",
+      "requiredAttributes": [
+        "plain",
+        "firm",
+        "tofu"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken breast",
+      "category": "Protein and frozen",
+      "aliases": [
+        "poulet",
+        "blanc de poulet"
+      ],
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "requiredAttributes": [
+        "chicken breast",
+        "fresh"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "peas",
+      "name": "Frozen peas",
+      "category": "Protein and frozen",
+      "aliases": [
+        "petits pois",
+        "surgelés"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "requiredAttributes": [
+        "peas",
+        "frozen"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "olive-oil",
+      "name": "Olive oil",
+      "category": "Pantry",
+      "aliases": [
+        "huile d’olive",
+        "huile d'olive"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "requiredAttributes": [
+        "olive oil"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "coffee",
+      "name": "Ground coffee",
+      "category": "Pantry",
+      "aliases": [
+        "café",
+        "cafe"
+      ],
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "requiredAttributes": [
+        "ground coffee"
+      ],
+      "barcode": null
+    },
+    {
+      "id": "sugar",
+      "name": "Granulated sugar",
+      "category": "Pantry",
+      "aliases": [
+        "sucre"
+      ],
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "requiredAttributes": [
+        "granulated sugar"
+      ],
+      "barcode": null
+    }
+  ],
+  "observations": [
+    {
+      "id": "demo-a-milk-v1",
+      "itemId": "milk",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Semi-skimmed UHT milk · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "semi-skimmed",
+        "UHT",
+        "dairy"
+      ],
+      "priceCents": 120,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-milk-v1",
+      "itemId": "milk",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Semi-skimmed UHT milk · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "semi-skimmed",
+        "UHT",
+        "dairy"
+      ],
+      "priceCents": 135,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-milk-v1",
+      "itemId": "milk",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Semi-skimmed UHT milk · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "semi-skimmed",
+        "UHT",
+        "dairy"
+      ],
+      "priceCents": 110,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-milk-v1",
+      "itemId": "milk",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Semi-skimmed UHT milk · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "semi-skimmed",
+        "UHT",
+        "dairy"
+      ],
+      "priceCents": 100,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-yogurt-v1",
+      "itemId": "yogurt",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Plain yogurt · 4 × 125 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "4 × 125 g",
+      "attributes": [
+        "plain",
+        "dairy",
+        "four pots"
+      ],
+      "priceCents": 180,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-yogurt-v1",
+      "itemId": "yogurt",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Plain yogurt · 4 × 125 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "4 × 125 g",
+      "attributes": [
+        "plain",
+        "dairy",
+        "four pots"
+      ],
+      "priceCents": 170,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-yogurt-v1",
+      "itemId": "yogurt",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Plain yogurt · 4 × 125 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "4 × 125 g",
+      "attributes": [
+        "plain",
+        "dairy",
+        "four pots"
+      ],
+      "priceCents": 160,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-yogurt-v1",
+      "itemId": "yogurt",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Plain yogurt · 4 × 125 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "4 × 125 g",
+      "attributes": [
+        "plain",
+        "dairy",
+        "four pots"
+      ],
+      "priceCents": 185,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-butter-v1",
+      "itemId": "butter",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Butter · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "dairy butter"
+      ],
+      "priceCents": 225,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-butter-v1",
+      "itemId": "butter",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Butter · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "dairy butter"
+      ],
+      "priceCents": 240,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-butter-v1",
+      "itemId": "butter",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Butter · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "dairy butter"
+      ],
+      "priceCents": 215,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-butter-v1",
+      "itemId": "butter",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Butter · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "dairy butter"
+      ],
+      "priceCents": 235,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-eggs-v1",
+      "itemId": "eggs",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Medium free-range eggs · 6-pack",
+      "packQuantity": 6,
+      "packUnit": "count",
+      "packLabel": "6-pack",
+      "attributes": [
+        "medium",
+        "free-range"
+      ],
+      "priceCents": 240,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-eggs-v1",
+      "itemId": "eggs",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Medium free-range eggs · 6-pack",
+      "packQuantity": 6,
+      "packUnit": "count",
+      "packLabel": "6-pack",
+      "attributes": [
+        "medium",
+        "free-range"
+      ],
+      "priceCents": 210,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-eggs-v1",
+      "itemId": "eggs",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Medium free-range eggs · 6-pack",
+      "packQuantity": 6,
+      "packUnit": "count",
+      "packLabel": "6-pack",
+      "attributes": [
+        "medium",
+        "free-range"
+      ],
+      "priceCents": 265,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-spaghetti-v1",
+      "itemId": "spaghetti",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Spaghetti · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "durum wheat",
+        "dried spaghetti"
+      ],
+      "priceCents": 100,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-spaghetti-v1",
+      "itemId": "spaghetti",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Spaghetti · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "durum wheat",
+        "dried spaghetti"
+      ],
+      "priceCents": 85,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-spaghetti-v1",
+      "itemId": "spaghetti",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Spaghetti · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "durum wheat",
+        "dried spaghetti"
+      ],
+      "priceCents": 120,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-spaghetti-v1",
+      "itemId": "spaghetti",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Spaghetti · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "durum wheat",
+        "dried spaghetti"
+      ],
+      "priceCents": 80,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-rice-v1",
+      "itemId": "rice",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "White rice · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "white rice"
+      ],
+      "priceCents": 180,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-rice-v1",
+      "itemId": "rice",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "White rice · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "white rice"
+      ],
+      "priceCents": 170,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-rice-v1",
+      "itemId": "rice",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "White rice · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "white rice"
+      ],
+      "priceCents": 175,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-rice-v1",
+      "itemId": "rice",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "White rice · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "white rice"
+      ],
+      "priceCents": 160,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-oats-v1",
+      "itemId": "oats",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Rolled oats · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "rolled oats"
+      ],
+      "priceCents": 130,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-oats-v1",
+      "itemId": "oats",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Rolled oats · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "rolled oats"
+      ],
+      "priceCents": 145,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-oats-v1",
+      "itemId": "oats",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Rolled oats · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "rolled oats"
+      ],
+      "priceCents": 115,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-couscous-v1",
+      "itemId": "couscous",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Wheat couscous · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wheat couscous"
+      ],
+      "priceCents": 165,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-couscous-v1",
+      "itemId": "couscous",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Wheat couscous · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wheat couscous"
+      ],
+      "priceCents": 150,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-couscous-v1",
+      "itemId": "couscous",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Wheat couscous · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wheat couscous"
+      ],
+      "priceCents": 140,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-couscous-v1",
+      "itemId": "couscous",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Wheat couscous · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wheat couscous"
+      ],
+      "priceCents": 155,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-bread-v1",
+      "itemId": "bread",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Sliced wholemeal bread · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wholemeal",
+        "sliced"
+      ],
+      "priceCents": 185,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-bread-v1",
+      "itemId": "bread",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Sliced wholemeal bread · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wholemeal",
+        "sliced"
+      ],
+      "priceCents": 195,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-bread-v1",
+      "itemId": "bread",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Sliced wholemeal bread · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wholemeal",
+        "sliced"
+      ],
+      "priceCents": 170,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-bread-v1",
+      "itemId": "bread",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Sliced wholemeal bread · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "wholemeal",
+        "sliced"
+      ],
+      "priceCents": 190,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-tomatoes-v1",
+      "itemId": "tomatoes",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Chopped tomatoes · 400 g",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g",
+      "attributes": [
+        "chopped",
+        "tinned"
+      ],
+      "priceCents": 90,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-tomatoes-v1",
+      "itemId": "tomatoes",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Chopped tomatoes · 400 g",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g",
+      "attributes": [
+        "chopped",
+        "tinned"
+      ],
+      "priceCents": 105,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-tomatoes-v1",
+      "itemId": "tomatoes",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Chopped tomatoes · 400 g",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g",
+      "attributes": [
+        "chopped",
+        "tinned"
+      ],
+      "priceCents": 85,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-tomatoes-v1",
+      "itemId": "tomatoes",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Chopped tomatoes · 400 g",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g",
+      "attributes": [
+        "chopped",
+        "tinned"
+      ],
+      "priceCents": 100,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-chickpeas-v1",
+      "itemId": "chickpeas",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Cooked chickpeas · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked chickpeas",
+        "net weight"
+      ],
+      "priceCents": 100,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-chickpeas-v1",
+      "itemId": "chickpeas",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Cooked chickpeas · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked chickpeas",
+        "net weight"
+      ],
+      "priceCents": 95,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-chickpeas-v1",
+      "itemId": "chickpeas",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Cooked chickpeas · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked chickpeas",
+        "net weight"
+      ],
+      "priceCents": 90,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-chickpeas-v1",
+      "itemId": "chickpeas",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Cooked chickpeas · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked chickpeas",
+        "net weight"
+      ],
+      "priceCents": 110,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-lentils-v1",
+      "itemId": "lentils",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Cooked lentils · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked lentils",
+        "net weight"
+      ],
+      "priceCents": 110,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-lentils-v1",
+      "itemId": "lentils",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Cooked lentils · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked lentils",
+        "net weight"
+      ],
+      "priceCents": 105,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-lentils-v1",
+      "itemId": "lentils",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Cooked lentils · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked lentils",
+        "net weight"
+      ],
+      "priceCents": 95,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-lentils-v1",
+      "itemId": "lentils",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Cooked lentils · 400 g net weight",
+      "packQuantity": 400,
+      "packUnit": "g",
+      "packLabel": "400 g net weight",
+      "attributes": [
+        "cooked lentils",
+        "net weight"
+      ],
+      "priceCents": 100,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-passata-v1",
+      "itemId": "passata",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Tomato passata · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "tomato passata"
+      ],
+      "priceCents": 115,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-passata-v1",
+      "itemId": "passata",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Tomato passata · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "tomato passata"
+      ],
+      "priceCents": 125,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-passata-v1",
+      "itemId": "passata",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Tomato passata · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "tomato passata"
+      ],
+      "priceCents": 105,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-apples-v1",
+      "itemId": "apples",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Apples · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "apples",
+        "bagged"
+      ],
+      "priceCents": 240,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-apples-v1",
+      "itemId": "apples",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Apples · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "apples",
+        "bagged"
+      ],
+      "priceCents": 260,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-apples-v1",
+      "itemId": "apples",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Apples · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "apples",
+        "bagged"
+      ],
+      "priceCents": 215,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-apples-v1",
+      "itemId": "apples",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Apples · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "apples",
+        "bagged"
+      ],
+      "priceCents": 250,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-bananas-v1",
+      "itemId": "bananas",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Bananas · 1 kg pack",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg pack",
+      "attributes": [
+        "bananas",
+        "packaged"
+      ],
+      "priceCents": 185,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-bananas-v1",
+      "itemId": "bananas",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Bananas · 1 kg pack",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg pack",
+      "attributes": [
+        "bananas",
+        "packaged"
+      ],
+      "priceCents": 175,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-bananas-v1",
+      "itemId": "bananas",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Bananas · 1 kg pack",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg pack",
+      "attributes": [
+        "bananas",
+        "packaged"
+      ],
+      "priceCents": 165,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-bananas-v1",
+      "itemId": "bananas",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Bananas · 1 kg pack",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg pack",
+      "attributes": [
+        "bananas",
+        "packaged"
+      ],
+      "priceCents": 190,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-carrots-v1",
+      "itemId": "carrots",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Carrots · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "carrots",
+        "bagged"
+      ],
+      "priceCents": 115,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-carrots-v1",
+      "itemId": "carrots",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Carrots · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "carrots",
+        "bagged"
+      ],
+      "priceCents": 110,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-carrots-v1",
+      "itemId": "carrots",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Carrots · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "carrots",
+        "bagged"
+      ],
+      "priceCents": 95,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-carrots-v1",
+      "itemId": "carrots",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Carrots · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "carrots",
+        "bagged"
+      ],
+      "priceCents": 120,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-potatoes-v1",
+      "itemId": "potatoes",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Potatoes · 2 kg bag",
+      "packQuantity": 2000,
+      "packUnit": "g",
+      "packLabel": "2 kg bag",
+      "attributes": [
+        "potatoes",
+        "bagged"
+      ],
+      "priceCents": 310,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-potatoes-v1",
+      "itemId": "potatoes",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Potatoes · 2 kg bag",
+      "packQuantity": 2000,
+      "packUnit": "g",
+      "packLabel": "2 kg bag",
+      "attributes": [
+        "potatoes",
+        "bagged"
+      ],
+      "priceCents": 295,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-potatoes-v1",
+      "itemId": "potatoes",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Potatoes · 2 kg bag",
+      "packQuantity": 2000,
+      "packUnit": "g",
+      "packLabel": "2 kg bag",
+      "attributes": [
+        "potatoes",
+        "bagged"
+      ],
+      "priceCents": 260,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-onions-v1",
+      "itemId": "onions",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Onions · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "onions",
+        "bagged"
+      ],
+      "priceCents": 150,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-onions-v1",
+      "itemId": "onions",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Onions · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "onions",
+        "bagged"
+      ],
+      "priceCents": 140,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-onions-v1",
+      "itemId": "onions",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Onions · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "onions",
+        "bagged"
+      ],
+      "priceCents": 120,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-onions-v1",
+      "itemId": "onions",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Onions · 1 kg bag",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg bag",
+      "attributes": [
+        "onions",
+        "bagged"
+      ],
+      "priceCents": 155,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-tofu-v1",
+      "itemId": "tofu",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Plain firm tofu · 200 g",
+      "packQuantity": 200,
+      "packUnit": "g",
+      "packLabel": "200 g",
+      "attributes": [
+        "plain",
+        "firm",
+        "tofu"
+      ],
+      "priceCents": 210,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-tofu-v1",
+      "itemId": "tofu",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Plain firm tofu · 200 g",
+      "packQuantity": 200,
+      "packUnit": "g",
+      "packLabel": "200 g",
+      "attributes": [
+        "plain",
+        "firm",
+        "tofu"
+      ],
+      "priceCents": 225,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-tofu-v1",
+      "itemId": "tofu",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Plain firm tofu · 200 g",
+      "packQuantity": 200,
+      "packUnit": "g",
+      "packLabel": "200 g",
+      "attributes": [
+        "plain",
+        "firm",
+        "tofu"
+      ],
+      "priceCents": 185,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-chicken-v1",
+      "itemId": "chicken",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Chicken breast · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "chicken breast",
+        "fresh"
+      ],
+      "priceCents": 595,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-chicken-v1",
+      "itemId": "chicken",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Chicken breast · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "chicken breast",
+        "fresh"
+      ],
+      "priceCents": 575,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-chicken-v1",
+      "itemId": "chicken",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Chicken breast · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "chicken breast",
+        "fresh"
+      ],
+      "priceCents": 625,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-chicken-v1",
+      "itemId": "chicken",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Chicken breast · 500 g",
+      "packQuantity": 500,
+      "packUnit": "g",
+      "packLabel": "500 g",
+      "attributes": [
+        "chicken breast",
+        "fresh"
+      ],
+      "priceCents": 610,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-peas-v1",
+      "itemId": "peas",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Frozen peas · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "peas",
+        "frozen"
+      ],
+      "priceCents": 230,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-peas-v1",
+      "itemId": "peas",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Frozen peas · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "peas",
+        "frozen"
+      ],
+      "priceCents": 220,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-peas-v1",
+      "itemId": "peas",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Frozen peas · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "peas",
+        "frozen"
+      ],
+      "priceCents": 195,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-peas-v1",
+      "itemId": "peas",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Frozen peas · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "peas",
+        "frozen"
+      ],
+      "priceCents": 240,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-olive-oil-v1",
+      "itemId": "olive-oil",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Olive oil · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "olive oil"
+      ],
+      "priceCents": 650,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-olive-oil-v1",
+      "itemId": "olive-oil",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Olive oil · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "olive oil"
+      ],
+      "priceCents": 725,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-olive-oil-v1",
+      "itemId": "olive-oil",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Olive oil · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "olive oil"
+      ],
+      "priceCents": 795,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-olive-oil-v1",
+      "itemId": "olive-oil",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Olive oil · 1 L",
+      "packQuantity": 1000,
+      "packUnit": "ml",
+      "packLabel": "1 L",
+      "attributes": [
+        "olive oil"
+      ],
+      "priceCents": 675,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-coffee-v1",
+      "itemId": "coffee",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Ground coffee · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "ground coffee"
+      ],
+      "priceCents": 290,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-coffee-v1",
+      "itemId": "coffee",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Ground coffee · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "ground coffee"
+      ],
+      "priceCents": 350,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-coffee-v1",
+      "itemId": "coffee",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Ground coffee · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "ground coffee"
+      ],
+      "priceCents": 375,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-coffee-v1",
+      "itemId": "coffee",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Ground coffee · 250 g",
+      "packQuantity": 250,
+      "packUnit": "g",
+      "packLabel": "250 g",
+      "attributes": [
+        "ground coffee"
+      ],
+      "priceCents": 310,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-a-sugar-v1",
+      "itemId": "sugar",
+      "storeId": "demo-a",
+      "productCode": null,
+      "productLabel": "Granulated sugar · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "granulated sugar"
+      ],
+      "priceCents": 125,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-b-sugar-v1",
+      "itemId": "sugar",
+      "storeId": "demo-b",
+      "productCode": null,
+      "productLabel": "Granulated sugar · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "granulated sugar"
+      ],
+      "priceCents": 135,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-c-sugar-v1",
+      "itemId": "sugar",
+      "storeId": "demo-c",
+      "productCode": null,
+      "productLabel": "Granulated sugar · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "granulated sugar"
+      ],
+      "priceCents": 140,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    },
+    {
+      "id": "demo-d-sugar-v1",
+      "itemId": "sugar",
+      "storeId": "demo-d",
+      "productCode": null,
+      "productLabel": "Granulated sugar · 1 kg",
+      "packQuantity": 1000,
+      "packUnit": "g",
+      "packLabel": "1 kg",
+      "attributes": [
+        "granulated sugar"
+      ],
+      "priceCents": 120,
+      "currency": "EUR",
+      "priceBasis": "pack",
+      "channel": "in_store",
+      "condition": "regular",
+      "matchBasis": "demo_spec",
+      "matchNote": "Authored synthetic price for this fixed catalog pack; not a supermarket observation.",
+      "observedOn": null,
+      "retrievedAt": null,
+      "verification": "synthetic",
+      "source": {
+        "provider": "synthetic",
+        "recordId": null,
+        "recordUrl": null,
+        "proofId": null
+      }
+    }
+  ]
+}

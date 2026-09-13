@@ -1,0 +1,57 @@
+{
+  "id": 326458,
+  "type": "PRODUCT",
+  "product_code": "3468572044629",
+  "price": 3.54,
+  "currency": "EUR",
+  "price_is_discounted": false,
+  "discount_type": null,
+  "price_per": null,
+  "date": "2026-09-08",
+  "duplicate_of": null,
+  "proof_id": 132325,
+  "location": {
+    "id": 2224,
+    "type": "OSM",
+    "osm_id": 6738523599,
+    "osm_type": "NODE",
+    "osm_name": "Carrefour Market",
+    "osm_brand": "Carrefour Market",
+    "osm_display_name": "Carrefour Market, 7, Place Françoise Dorin, Quartier des Batignolles, Paris 17e Arrondissement, Paris, France métropolitaine, 75017, France",
+    "osm_address_city": "Paris",
+    "osm_address_postcode": "75017",
+    "osm_address_country_code": "FR",
+    "osm_lat": 48.8890169,
+    "osm_lon": 2.3141289,
+    "osm_tag_value": "supermarket"
+  },
+  "product": {
+    "code": "3468572044629",
+    "product_name": "Eau Minérale Naturelle Pétillante",
+    "source": "off",
+    "quantity": "3000 ml (6x500ml)",
+    "product_quantity": 3000,
+    "product_quantity_unit": "ml",
+    "categories_tags": [
+      "en:beverages-and-beverages-preparations",
+      "en:beverages",
+      "en:carbonated-drinks",
+      "en:waters",
+      "en:spring-waters",
+      "en:mineral-waters",
+      "en:unsweetened-beverages",
+      "en:carbonated-waters",
+      "en:natural-mineral-waters",
+      "en:carbonated-mineral-waters",
+      "en:carbonated-natural-mineral-waters",
+      "en:mildly-carbonated-natural-mineral-water"
+    ],
+    "brands": "Rozana",
+    "image_url": "https://images.openfoodfacts.org/images/products/346/857/204/4629/front_fr.27.400.jpg"
+  },
+  "proof": {
+    "type": "RECEIPT",
+    "location_id": 2224,
+    "receipt_online_delivery_costs": null
+  }
+}

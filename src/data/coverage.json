@@ -1,0 +1,83 @@
+{
+  "runAt": "2026-09-12T19:59:07.327Z",
+  "analysisCompletedAt": "2026-09-12T19:59:07.333Z",
+  "source": "Open Prices",
+  "sourceLicense": "ODbL",
+  "sourceUrl": "https://openfoodfacts.github.io/open-prices/guides/data/",
+  "schemaUrl": "https://prices.openfoodfacts.org/api/schema",
+  "schemaVersion": "0.0.0 (api)",
+  "schemaSha256": "0eab4ed7a3d129537d98823872dfbbe2118cc4dddebd276c0f3e592e7501bc5f",
+  "queries": [
+    "https://prices.openfoodfacts.org/api/v1/prices?currency=EUR&lat=48.853&lon=2.369&radius_km=3&type=PRODUCT&date__gte=2026-08-13&date__lte=2026-09-12&page=1&size=100"
+  ],
+  "region": "3 km around Bastille, Paris (48.853, 2.369)",
+  "dateWindow": {
+    "from": "2026-08-13",
+    "to": "2026-09-12",
+    "maxAgeDays": 30
+  },
+  "pagesExamined": 1,
+  "reportedPages": 1,
+  "reportedTotal": 12,
+  "capped": false,
+  "rawRowCount": 12,
+  "retainedRowCount": 0,
+  "branchCount": 3,
+  "distinctBarcodes": 12,
+  "barcodesAtMultipleBranches": 0,
+  "maxSharedItemsBetweenTwoStores": 0,
+  "distinctComparableItems": 0,
+  "completeStoreCount": 0,
+  "branches": [
+    {
+      "id": "6855",
+      "name": "Irasshai",
+      "locationType": "cafe",
+      "observations": 6,
+      "distinctBarcodes": 6
+    },
+    {
+      "id": "4048",
+      "name": "Mon Épicerie Paris",
+      "locationType": "convenience",
+      "observations": 4,
+      "distinctBarcodes": 4
+    },
+    {
+      "id": "912",
+      "name": "Umai",
+      "locationType": "deli",
+      "observations": 2,
+      "distinctBarcodes": 2
+    }
+  ],
+  "observationDates": [
+    "2026-08-17",
+    "2026-08-19"
+  ],
+  "priceBases": {
+    "unknown": 12
+  },
+  "exclusionsByReason": {
+    "grocery_store_type_not_established": 6,
+    "pack_price_basis_unresolved": 12,
+    "in_store_channel_not_independently_established": 12,
+    "package_identity_incomplete": 5
+  },
+  "exclusionCountsOverlap": true,
+  "gate": {
+    "requiredStores": 2,
+    "requiredCommonItems": 6,
+    "passed": false
+  },
+  "outcome": "No observed dataset published",
+  "reason": "The nearby sample does not have six matching barcodes across two stores. Package, price basis and sales channel also need confirmation.",
+  "unresolvedAssumptions": [
+    "Null price_per is not assumed to mean a defined pack price.",
+    "An OSM location does not independently prove an in-store sales channel.",
+    "No shelf check or receipt image review was performed.",
+    "Defining product attributes and package identities were not manually matched across brands.",
+    "This narrow sample is not an exhaustive Paris price audit."
+  ],
+  "requestMode": "Analysis of the captured API page; no repeated price retrieval"
+}

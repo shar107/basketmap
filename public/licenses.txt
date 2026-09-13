@@ -1,0 +1,19 @@
+BasketMap — licences and attribution
+
+Price observations: © Open Prices contributors, Open Database Licence 1.0 (ODbL).
+https://prices.openfoodfacts.org
+https://opendatacommons.org/licenses/odbl/1-0/
+The adapted, published database is available at /data/france-market.json under ODbL 1.0.
+
+Product information: © Open Food Facts contributors, ODbL.
+Product photographs: © Open Food Facts contributors, CC BY-SA.
+Images are displayed unmodified from images.openfoodfacts.org. Original product pages are available at https://world.openfoodfacts.org/product/{barcode}.
+https://world.openfoodfacts.org/terms-of-use
+
+Store locations and map: © OpenStreetMap contributors, ODbL.
+https://www.openstreetmap.org/copyright
+
+City search: French government geographic API.
+https://geo.api.gouv.fr
+
+Runtime software licences: /licenses/index.json
