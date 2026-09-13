@@ -659,7 +659,7 @@ Choose one:
 
 Several existing commits use:
 
-`Sharadindu ADHIKARI <51527793+shar107@users.noreply.github.com>`
+`Sharad Adhikari <51527793+shar107@users.noreply.github.com>`
 
 If the repository is made public, that email may be visible in Git history.
 
@@ -726,7 +726,7 @@ Review the complete `git status` output before staging.
 After choosing the desired GitHub-visible address:
 
 ```sh
-git config user.name "Sharadindu Adhikari"
+git config user.name "Sharad Adhikari"
 git config user.email "YOUR_CHOSEN_GITHUB_EMAIL"
 ```
 

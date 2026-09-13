@@ -1291,7 +1291,7 @@ export default function App() {
             basketmap.
           </a>
           <span>
-            Created by <strong>Sharadindu Adhikari</strong>
+            Created by <strong>Sharad Adhikari</strong>
           </span>
         </div>
         <div className="footer-links">

@@ -1,6 +1,14 @@
-# BasketMap
+# sharad.fr and BasketMap
+
+Personal site: https://sharad.fr/
 
 Live project: https://sharad.fr/projects/basketmap/
+
+The repository contains two independently built frontends:
+
+- `portfolio/` is the Astro personal site published at the domain root.
+- the repository root is the React/Vite BasketMap application published at
+  `/projects/basketmap/`.
 
 BasketMap is a focused grocery-price comparison product for Lyon and Paris.
 Visitors choose a city, build a basket, compare complete totals across real
@@ -91,13 +99,14 @@ commercial feeds.
 
 GitHub Actions publishes a combined GitHub Pages site:
 
-- `https://sharad.fr/` contains the personal projects homepage from `site/`.
+- `https://sharad.fr/` contains the Astro portfolio from `portfolio/`.
 - `https://sharad.fr/projects/basketmap/` contains the Vite application.
 
-The workflow builds BasketMap with `BASKETMAP_BASE_PATH` so assets, client-side
-navigation, downloads, and data requests work beneath the nested URL. The
-existing Sites registration remains in `.openai/hosting.json` as historical
-deployment metadata.
+The workflow builds both applications, copies the portfolio to the deployment
+root, and then copies BasketMap into its nested project directory. BasketMap is
+built with `BASKETMAP_BASE_PATH` so assets, client-side navigation, downloads,
+and data requests work beneath that URL. The existing Sites registration
+remains in `.openai/hosting.json` as historical deployment metadata.
 
 ## Licence
 

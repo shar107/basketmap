@@ -1,0 +1,28 @@
+---
+const path = Astro.url.pathname;
+// normalise: strip trailing slash (except root)
+const here = path !== '/' && path.endsWith('/') ? path.slice(0, -1) : path;
+
+const links = [
+  { label: 'home', href: '/' },
+  { label: 'about', href: '/about' },
+  { label: 'now', href: '/now' },
+  { label: 'experience', href: '/experience' },
+  { label: 'projects', href: '/projects' },
+  { label: 'notes', href: '/essays' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return here === '/';
+  return here === href || here.startsWith(href + '/');
+}
+---
+<nav class="capsule-nav" aria-label="Primary">
+  <ul>
+    {links.map((l) => (
+      <li>
+        <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>

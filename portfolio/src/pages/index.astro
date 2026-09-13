@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Now from '../components/Now.astro';
+import Essays from '../components/Essays.astro';
+import Projects from '../components/Projects.astro';
+import Recs from '../components/Recs.astro';
+import Footer from '../components/Footer.astro';
+import Artefact from '../components/Artefact.astro';
+---
+<Base
+  title="Sharad Adhikari — projects, products, and notes"
+  description="Sharad Adhikari builds useful products with data, design, and AI from Lyon, France."
+>
+  <Hero />
+  <Now />
+  <Artefact kind="coffee" pos="right" rotate={-6} />
+  <Projects />
+  <Artefact kind="paperclip" pos="left" rotate={12} />
+  <Recs />
+  <Essays />
+  <Artefact kind="star" pos="center" rotate={-4} />
+  <Footer />
+</Base>

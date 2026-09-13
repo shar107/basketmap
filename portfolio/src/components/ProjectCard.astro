@@ -1,0 +1,25 @@
+---
+interface Props {
+  num: number;
+  href: string;
+  title: string;
+  description: string;
+  tags?: string[];
+  status?: string;
+}
+const { num, href, title, description, tags = [], status } = Astro.props;
+const n = String(num).padStart(2, '0');
+---
+<a class="project-card" href={href}>
+  <div class="project-card-top">
+    <span class="project-num">({n})</span>
+    {status && status !== 'active' && <span class="project-status">{status}</span>}
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {tags.length > 0 && (
+    <div class="project-tags">
+      {tags.map((t) => <span>{t}</span>)}
+    </div>
+  )}
+</a>

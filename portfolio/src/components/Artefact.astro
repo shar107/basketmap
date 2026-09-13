@@ -1,0 +1,43 @@
+---
+interface Props {
+  kind: 'coffee' | 'paperclip' | 'star';
+  pos?: 'left' | 'center' | 'right';
+  rotate?: number;
+}
+const { kind, pos = 'center', rotate = 0 } = Astro.props;
+---
+<div class="artefact-row" data-pos={pos}>
+  <svg
+    class="artefact"
+    style={`transform: rotate(${rotate}deg)`}
+    viewBox="0 0 40 40"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    {kind === 'coffee' && (
+      <g>
+        <path d="M16 6 C14 9, 18 12, 16 15" opacity="0.55"/>
+        <path d="M22 6 C20 9, 24 12, 22 15" opacity="0.55"/>
+        <path d="M9 18 L9 30 Q9 33, 12 33 L25 33 Q28 33, 28 30 L28 18 Z"/>
+        <path d="M28 22 Q33 22, 33 25 Q33 28, 28 28"/>
+      </g>
+    )}
+    {kind === 'paperclip' && (
+      <g>
+        <path d="M14 7 L14 30 Q14 35, 19 35 Q24 35, 24 30 L24 12 Q24 9, 21 9 Q18 9, 18 12 L18 28"/>
+      </g>
+    )}
+    {kind === 'star' && (
+      <g>
+        <path d="M20 7 L20 33"/>
+        <path d="M7 20 L33 20"/>
+        <path d="M11 11 L29 29"/>
+        <path d="M29 11 L11 29"/>
+      </g>
+    )}
+  </svg>
+</div>

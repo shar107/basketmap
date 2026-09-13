@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            portfolio/package-lock.json
 
       - run: npm ci
       - run: npm run typecheck
@@ -31,11 +34,13 @@ jobs:
       - run: npm run build
         env:
           BASKETMAP_BASE_PATH: /projects/basketmap/
+      - run: npm ci --prefix portfolio
+      - run: npm run build --prefix portfolio
 
       - name: Assemble sharad.fr
         run: |
           mkdir -p _site/projects/basketmap/shop _site/projects/basketmap/results
-          cp -R site/. _site/
+          cp -R portfolio/dist/. _site/
           cp -R dist/. _site/projects/basketmap/
           cp dist/index.html _site/projects/basketmap/shop/index.html
           cp dist/index.html _site/projects/basketmap/results/index.html

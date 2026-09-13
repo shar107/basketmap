@@ -1,5 +1,8 @@
 node_modules/
 dist/
+portfolio/.astro/
+portfolio/dist/
+portfolio/node_modules/
 .env
 .env.*
 !.env.example

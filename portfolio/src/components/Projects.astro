@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<section>
+  <h2>// projects</h2>
+  <div class="project-grid">
+    {projects.map((p, i) => (
+      <ProjectCard
+        num={i + 1}
+        href={p.data.url ?? `/projects/${p.id}/`}
+        title={p.data.title}
+        description={p.data.description}
+        tags={p.data.tags}
+        status={p.data.status}
+      />
+    ))}
+  </div>
+</section>
