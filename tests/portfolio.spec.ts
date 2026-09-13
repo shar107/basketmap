@@ -21,7 +21,7 @@ test("agent tools share the visible real basket and reject invalid quantities", 
     });
     (window as unknown as { tools: unknown }).tools = registry;
   });
-  await page.goto("/");
+  await page.goto("/shop");
   await expect(page.locator(".product-card").first()).toBeVisible();
   const itemId = await page
     .locator(".product-card")
@@ -64,7 +64,7 @@ test("offline bootstrap failure keeps navigation and recovery available", async 
 }) => {
   await page.route("**/data/france-market.json", (r) => r.abort());
   await page.route("https://prices.openfoodfacts.org/api/**", (r) => r.abort());
-  await page.goto("/");
+  await page.goto("/shop");
   await expect(
     page.getByRole("heading", { name: "No recent prices in this area yet" }),
   ).toBeVisible();
@@ -77,7 +77,7 @@ test("offline bootstrap failure keeps navigation and recovery available", async 
 });
 test("comparison export is a real observed dataset", async ({ page }) => {
   await page.route("https://prices.openfoodfacts.org/api/**", (r) => r.abort());
-  await page.goto("/");
+  await page.goto("/shop");
   await page.locator(".product-card").first().locator(".add-product").click();
   await page
     .getByRole("button", { name: "Compare my basket", exact: true })

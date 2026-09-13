@@ -23,6 +23,8 @@ inventory, and coverage and stock are not guaranteed.
 - There is no unrestricted location or postcode search.
 - The homepage explains the product immediately and includes an interactive
   store map.
+- The catalog is a separate `/shop` view. Visitors must choose “Start your
+  shopping list” before product search and basket-building controls appear.
 - Exact branded products remain searchable by name or barcode.
 - Comparable essentials group real products only when their type and displayed
   pack size match. Each branch uses one explicitly selected source product and

@@ -18,6 +18,13 @@ async function addComparisonReadyProduct(
       name: "Build your basket. Compare your total. Choose where to shop.",
     }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("textbox", { name: "Search products" }),
+  ).toHaveCount(0);
+  await page
+    .getByRole("link", { name: "Start your shopping list", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/shop$/);
   const product = page.locator(".product-card").first();
   await expect(product).toBeVisible();
   await expect(product.locator(".product-coverage")).not.toHaveClass(/limited/);
@@ -25,6 +32,40 @@ async function addComparisonReadyProduct(
   await product.locator(".add-product").click();
   return itemId!;
 }
+
+test("the landing page requires an explicit transition into shopping", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".shopping-layout")).toHaveCount(0);
+  await expect(
+    page.getByRole("textbox", { name: "Search products" }),
+  ).toHaveCount(0);
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect(
+    page.getByRole("textbox", { name: "Search products" }),
+  ).toHaveCount(0);
+
+  await page
+    .getByRole("link", { name: "Start your shopping list", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/shop$/);
+  await expect(
+    page.getByRole("heading", { name: "What’s on your list?" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("textbox", { name: "Search products" }),
+  ).toBeVisible();
+
+  await page.goBack();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(
+    page.getByRole("heading", {
+      name: "Build your basket. Compare your total. Choose where to shop.",
+    }),
+  ).toBeVisible();
+  await expect(page.locator(".shopping-layout")).toHaveCount(0);
+});
 
 test("comparison-ready products produce real complete branch totals and evidence", async ({
   page,
@@ -61,6 +102,8 @@ test("comparison-ready products produce real complete branch totals and evidence
     .getByRole("button", { name: /Add one/ })
     .click();
   await expect(page.locator(".basket-panel")).toContainText("2 packs");
+  await page.getByRole("button", { name: "Keep shopping" }).click();
+  await expect(page).toHaveURL(/\/shop$/);
   await page.reload();
   await expect(
     page.locator(`.product-card[data-item-id="${itemId}"] .stepper`).first(),
@@ -154,7 +197,7 @@ test("store-specific products are added directly and excluded from shared totals
 });
 
 test("milk search returns milk rather than milk chocolate", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/shop");
   const search = page.getByRole("textbox", { name: "Search products" });
   await search.fill("milk");
   await expect(page.locator(".shopping-main")).toContainText(
@@ -267,16 +310,15 @@ test("homepage and result maps remain usable when map tiles fail", async ({
   );
   await page.getByRole("button", { name: "Close store details" }).click();
 
+  await page
+    .getByRole("link", { name: "Start your shopping list", exact: true })
+    .click();
   await page.locator(".product-card").first().locator(".add-product").click();
   await page
     .getByRole("button", { name: "Compare my basket", exact: true })
     .click();
   await page.getByRole("button", { name: "Map view", exact: true }).click();
   const resultsMap = page.locator(".shopping-main .bm-map-panel");
-  const resultsToggle = resultsMap.getByRole("button", {
-    name: "Use simplified map",
-  });
-  if (await resultsToggle.isVisible()) await resultsToggle.click();
   await expect(resultsMap.locator(".bm-coordinate-plot")).toBeVisible();
   await page
     .locator(".bm-coordinate-plot")
@@ -321,5 +363,6 @@ test("old project pages resolve to the shopper product", async ({ page }) => {
     await expect(
       page.getByRole("link", { name: "Product story", exact: true }),
     ).toHaveCount(0);
+    await expect(page.locator(".shopping-layout")).toHaveCount(0);
   }
 });

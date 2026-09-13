@@ -69,6 +69,15 @@ const shortDate = (date: string) =>
     month: "short",
     timeZone: "UTC",
   }).format(new Date(`${date}T12:00:00Z`));
+type AppView = "home" | "shop" | "results";
+const viewPath = (view: AppView) =>
+  view === "home" ? "/" : `/${view}`;
+const viewFromPath = (): AppView => {
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  if (path === "/shop") return "shop";
+  if (path === "/results") return "results";
+  return "home";
+};
 function ChainWordmark({ chain }: { chain: string }) {
   const key=normalize(chain).replace(/[^a-z]/g,"");
   if(chain==="Carrefour")return <span className={`chain-wordmark brand-${key}`}><i className="carrefour-symbol" aria-hidden="true"/><b>Carrefour</b></span>;
@@ -114,7 +123,7 @@ export default function App() {
   const [search, setSearch] = useState(""),
     [category, setCategory] = useState("All products"),
     [limit, setLimit] = useState(12);
-  const [view, setView] = useState<"shop" | "results">("shop"),
+  const [view, setView] = useState<AppView>(viewFromPath),
     [mapView, setMapView] = useState(false);
   const [loading, setLoading] = useState(true),
     [refreshing, setRefreshing] = useState(false),
@@ -330,6 +339,23 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
   useEffect(() => {
+    const handlePopState = () => {
+      setView(viewFromPath());
+      setBasketOpen(false);
+      window.scrollTo({ top: 0 });
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+  useEffect(() => {
+    document.title =
+      view === "home"
+        ? "BasketMap — A smarter everyday shop"
+        : view === "shop"
+          ? "Build your basket — BasketMap"
+          : "Compare your basket — BasketMap";
+  }, [view]);
+  useEffect(() => {
     const session: ShoppingSession = {
       basket,
       items: kept,
@@ -387,6 +413,15 @@ export default function App() {
     setBrowseStore(null);setSearch("");setShowPartial(false);
     setSelectedId(null);
   }
+  function navigate(next: AppView, replace = false) {
+    const path = viewPath(next);
+    if (window.location.pathname !== path) {
+      window.history[replace ? "replaceState" : "pushState"]({}, "", path);
+    }
+    setView(next);
+    setBasketOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   function startNewBasket() {
     setBasket([]);
     setKept([]);
@@ -394,20 +429,13 @@ export default function App() {
     setSelectedId(null);
     setBasketOpen(false);
     setNewBasketOpen(false);
-    setView("shop");
     setSearch("");
     setCategory("All products");
     setBrowseStore(null);
     setNotice(
       "New basket ready. Your previous basket was cleared from this device.",
     );
-    setTimeout(
-      () =>
-        document
-          .getElementById("products")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
-      50,
-    );
+    navigate("shop");
   }
   function requestNewBasket() {
     if (basket.length) setNewBasketOpen(true);
@@ -415,17 +443,8 @@ export default function App() {
   }
   function compare() {
     setShowPartial(false);
-    setView("results");
-    setBasketOpen(false);
+    navigate("results");
     void refresh(basket.map((b) => b.itemId));
-    setTimeout(
-      () =>
-        resultsRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        }),
-      50,
-    );
   }
   const stepper = (item: CatalogItem) => {
     const count = basket.find((b) => b.itemId === item.id)?.quantity || 0;
@@ -565,18 +584,20 @@ export default function App() {
   );
   return (
     <>
-      <a className="skip-link" href="#shop">
-        Skip to shopping
+      <a
+        className="skip-link"
+        href={view === "home" ? "#home-content" : "#products"}
+      >
+        Skip to {view === "home" ? "content" : "shopping"}
       </a>
       <header className="site-header">
         <div className="header-inner">
           <a
-            href="#"
+            href="/"
             className="brand"
             onClick={(e) => {
               e.preventDefault();
-              setView("shop");
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              navigate("home");
             }}
             aria-label="BasketMap home"
           >
@@ -609,7 +630,10 @@ export default function App() {
             <button
               className="mobile-basket"
               aria-label={`Open basket, ${unitCount} ${unitCount === 1 ? "pack" : "packs"}`}
-              onClick={() => setBasketOpen(true)}
+              onClick={() => {
+                if (view === "home") navigate("shop");
+                setBasketOpen(true);
+              }}
             >
               <ShoppingBasket size={20} />
               <span>{unitCount}</span>
@@ -617,10 +641,10 @@ export default function App() {
           </div>
         </div>
       </header>
-      <main id="shop">
-        {view === "shop" ? (
+      <main id={view === "home" ? "home" : "shop"}>
+        {view === "home" ? (
           <>
-            <section className="hero purpose-hero">
+            <section className="hero purpose-hero" id="home-content">
               <div className="hero-copy">
                 <span className="eyebrow">
                   GROCERY PRICE COMPARISON
@@ -637,7 +661,14 @@ export default function App() {
                   supermarkets have in common. Store-specific products stay
                   visible and are listed separately.
                 </p>
-                <a className="primary hero-link" href="#products">
+                <a
+                  className="primary hero-link"
+                  href="/shop"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigate("shop");
+                  }}
+                >
                   Start your shopping list <ArrowRight size={18} />
                 </a>
                 <span className="hero-freshness">
@@ -745,9 +776,9 @@ export default function App() {
               </div>
             </section>
           </>
-        ) : (
+        ) : view === "results" ? (
           <section className="results-intro">
-            <button className="text-button" onClick={() => setView("shop")}>
+            <button className="text-button" onClick={() => navigate("shop")}>
               <ArrowLeft size={16} /> Keep shopping
             </button>
             <h1>
@@ -759,8 +790,8 @@ export default function App() {
               {place.label}
             </p>
           </section>
-        )}
-        <div className="shopping-layout">
+        ) : null}
+        {view !== "home" && <div className="shopping-layout">
           <section className="shopping-main" id="products" ref={resultsRef}>
             <div className="section-top">
               <div>
@@ -1021,7 +1052,7 @@ export default function App() {
                   <div className="empty-state">
                     <ShoppingBasket size={32} />
                     <h3>Your basket is empty</h3>
-                    <button className="primary" onClick={() => setView("shop")}>
+                    <button className="primary" onClick={() => navigate("shop")}>
                       Find products <ArrowRight size={17} />
                     </button>
                   </div>
@@ -1096,7 +1127,7 @@ export default function App() {
                         </button>
                       </div>
                     </div>
-                    {!isSharedComparison&&complete.length<2&&<div className="coverage-message"><ShoppingBag size={22}/><div><h3>{complete.length===1?'Only one store can price every item.':'No shared total across two stores yet.'}</h3><p>{basket.length} products are saved in your list. {partial.length?`The best store currently prices ${partial[0].matchedLineCount} of ${comparisonBasket.length}.`:"There aren’t enough recent matching prices to calculate a fair store-to-store total."}</p><div className="recovery-actions"><button className="primary" onClick={()=>{setView('shop');setBasketOpen(true);}}>Edit my basket</button><button className="text-button" onClick={()=>setLocationOpen(true)}>Change city</button></div></div></div>}
+                    {!isSharedComparison&&complete.length<2&&<div className="coverage-message"><ShoppingBag size={22}/><div><h3>{complete.length===1?'Only one store can price every item.':'No shared total across two stores yet.'}</h3><p>{basket.length} products are saved in your list. {partial.length?`The best store currently prices ${partial[0].matchedLineCount} of ${comparisonBasket.length}.`:"There aren’t enough recent matching prices to calculate a fair store-to-store total."}</p><div className="recovery-actions"><button className="primary" onClick={()=>{navigate('shop');setBasketOpen(true);}}>Edit my basket</button><button className="text-button" onClick={()=>setLocationOpen(true)}>Change city</button></div></div></div>}
                     {!isSharedComparison&&partial.length>0&&<button className="partial-toggle" aria-expanded={showPartial} onClick={()=>setShowPartial(!showPartial)}>{showPartial?'Hide':'View'} store-by-store availability ({partial.length} stores) <ChevronDown size={14}/></button>}
                     {mapView ? (
                       <MapPanel
@@ -1233,7 +1264,7 @@ export default function App() {
               onClick={() => setBasketOpen(false)}
             />
           )}
-        </div>
+        </div>}
         <section className="closing-note">
           <div className="closing-leaf">
             <Leaf size={24} />
@@ -1248,7 +1279,14 @@ export default function App() {
       </main>
       <footer>
         <div className="footer-signature">
-          <a className="footer-brand" href="#">
+          <a
+            className="footer-brand"
+            href="/"
+            onClick={(event) => {
+              event.preventDefault();
+              navigate("home");
+            }}
+          >
             basketmap.
           </a>
           <span>
@@ -1280,7 +1318,10 @@ export default function App() {
           <a href="/licenses.txt">Licences</a>
         </div>
       </footer>
-      <div className="mobile-basket-bar" hidden={!basket.length || basketOpen}>
+      <div
+        className="mobile-basket-bar"
+        hidden={view === "home" || !basket.length || basketOpen}
+      >
         <button onClick={() => setBasketOpen(true)}>
           <ShoppingBasket size={19} />
           <span>{unitCount} {unitCount === 1 ? "pack" : "packs"}</span>
@@ -1365,10 +1406,10 @@ export default function App() {
             <span className="eyebrow">YOUR BASKET AT</span>
             <h2 id="detail-title">{selectedStore.name}</h2>
             <p>{selectedStore.address}</p>
-            {!basket.length?<><div className="store-discovery-summary"><strong>{priceCounts[selectedStore.id]||0}</strong><span>products with recent recorded prices</span></div><p className="catalog-explanation">A price record is not a stock check. Build your basket to see whether the same products can be compared across stores.</p><button className="primary" onClick={()=>{setBrowseStore(selectedStore.id);setSelectedId(null);setView('shop');setTimeout(()=>document.getElementById('products')?.scrollIntoView({behavior:'smooth'}),50);}}>Browse this store’s products <ArrowRight size={16}/></button></>:<>
+            {!basket.length?<><div className="store-discovery-summary"><strong>{priceCounts[selectedStore.id]||0}</strong><span>products with recent recorded prices</span></div><p className="catalog-explanation">A price record is not a stock check. Build your basket to see whether the same products can be compared across stores.</p><button className="primary" onClick={()=>{setBrowseStore(selectedStore.id);setSelectedId(null);navigate('shop');}}>Browse this store’s products <ArrowRight size={16}/></button></>:<>
             <div className="detail-total"><span>{selected.status==='complete'?(isSharedComparison?'Shared products total':'Full basket'):`${selected.matchedLineCount} of ${comparisonBasket.length} products priced`}</span><strong>{selected.matchedLineCount?formatEuro(selected.status==='complete'?selected.completeTotalCents!:selected.knownSubtotalCents):'Unavailable'}</strong></div>
             {isSharedComparison&&<p className="subset-notice">This total covers {comparisonBasket.length} shared {comparisonBasket.length === 1 ? "product" : "products"}. The other {excludedBasketLines.length} {excludedBasketLines.length === 1 ? "product is" : "products are"} listed separately in the comparison.</p>}
-            {selected.status!=='complete'&&<div className="coverage-message"><div><h3>This is not a full basket price.</h3><p>{selected.missingItemIds.length} products have no recent price here. Your shopping list stays saved.</p><button className="primary" onClick={()=>{setSelectedId(null);setView('shop');setBasketOpen(true);}}>Edit my basket</button></div></div>}
+            {selected.status!=='complete'&&<div className="coverage-message"><div><h3>This is not a full basket price.</h3><p>{selected.missingItemIds.length} products have no recent price here. Your shopping list stays saved.</p><button className="primary" onClick={()=>{setSelectedId(null);navigate('shop');setBasketOpen(true);}}>Edit my basket</button></div></div>}
             <div className="detail-lines">{selected.lines.filter(l=>l.observation).map(line=><div key={line.itemId}><div><strong>{line.item.name}</strong><span>{line.observation!.productLabel}{line.item.id.startsWith("essential:") ? ` · ${line.item.packLabel}` : ` · ${line.quantity} × ${line.item.packLabel}`}</span><small>Observed {shortDate(line.observation!.observedOn!)} · <a href={line.observation!.source.recordUrl!} target="_blank" rel="noreferrer">Price record <ArrowUpRight size={10}/></a></small></div><b>{formatEuro(line.lineTotalCents!)}</b></div>)}</div>
             {selected.missingItemIds.length>0&&<details className="missing-products"><summary>{selected.missingItemIds.length} products without recent prices</summary><ul>{selected.lines.filter(l=>!l.observation).map(l=><li key={l.itemId}>{l.item.name} · {l.item.packLabel}</li>)}</ul></details>}
             {selected.status==='complete'&&!isSharedComparison&&<a className="primary directions" href={`https://www.google.com/maps/dir/?api=1&destination=${selectedStore.lat},${selectedStore.lon}`} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={17}/></a>}
