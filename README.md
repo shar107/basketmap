@@ -1,6 +1,6 @@
 # BasketMap
 
-Live project: https://basketmap.sharad.fr/
+Live project: https://sharad.fr/projects/basketmap/
 
 Personal site repository:
 [`shar107/sharad-fr`](https://github.com/shar107/sharad-fr)
@@ -92,14 +92,14 @@ commercial feeds.
 
 ## Deployment
 
-GitHub Actions validates and builds BasketMap, adds static fallbacks for
-`/shop/` and `/results/`, and deploys the `dist/` directory directly to GitHub
-Pages. The custom domain is `basketmap.sharad.fr`.
+This repository owns BasketMap's source, tests, and validation workflow. The
+independent [`shar107/sharad-fr`](https://github.com/shar107/sharad-fr)
+deployment checks out this repository, builds it with the
+`/projects/basketmap/` base path, and mounts the static output at the public URL.
 
-The personal site is maintained independently in `shar107/sharad-fr`; changes
-to either repository no longer rebuild the other. The existing Sites
-registration remains in `.openai/hosting.json` as historical deployment
-metadata.
+The Sharad.fr workflow refreshes project sources hourly and can also be
+dispatched immediately after a project change. The existing Sites registration
+remains in `.openai/hosting.json` as historical deployment metadata.
 
 ## Licence
 
