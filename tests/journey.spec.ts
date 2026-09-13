@@ -28,6 +28,12 @@ async function addComparisonReadyProduct(
   const product = page.locator(".product-card").first();
   await expect(product).toBeVisible();
   await expect(product.locator(".product-coverage")).not.toHaveClass(/limited/);
+  await expect(product.locator(".product-store-source")).toContainText(
+    /Lowest observed at|Observed at/,
+  );
+  await expect(
+    product.locator(".product-store-source .chain-wordmark"),
+  ).toBeVisible();
   const itemId = await product.getAttribute("data-item-id");
   await product.locator(".add-product").click();
   return itemId!;
@@ -268,10 +274,8 @@ test("homepage and result maps remain usable when map tiles fail", async ({
   const homepageMap = page.locator(".homepage-map");
   const brands = homepageMap.locator(".chain-showcase");
   const mapCanvas = homepageMap.locator(".homepage-map-canvas");
-  await expect(brands.locator(".chain-brand-card")).toHaveCount(7);
-  await expect(
-    brands.getByRole("button", { name: /ALDI, no eligible price data/ }),
-  ).toBeDisabled();
+  expect(await brands.locator(".chain-brand-card").count()).toBeGreaterThan(7);
+  await expect(brands.locator(".chain-brand-card:disabled")).toHaveCount(0);
   for (const chain of [
     "Carrefour",
     "Auchan",
@@ -279,6 +283,10 @@ test("homepage and result maps remain usable when map tiles fail", async ({
     "Monoprix",
     "Lidl",
     "E.Leclerc",
+    "Super U",
+    "U Express",
+    "Biocoop",
+    "Franprix",
   ])
     await expect(
       brands.getByRole("button", { name: new RegExp(`^${chain.replace(".", "\\.")},`) }),

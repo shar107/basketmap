@@ -12,6 +12,183 @@
   --cream: #f3f2e9;
   --orange: #e8a577;
 }
+
+/* Supermarket wordmarks and product-source attribution */
+.brand-superu,
+.brand-uexpress {
+  color: #17864a;
+  gap: 4px;
+}
+
+.brand-superu b,
+.brand-uexpress b {
+  font: 800 12px/1 Arial, sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.brand-superu strong,
+.brand-uexpress strong {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font: 900 17px/1 Arial, sans-serif;
+}
+
+.brand-franprix {
+  color: #e0007a;
+}
+
+.brand-franprix b {
+  font: 900 18px/1 Arial, sans-serif;
+  letter-spacing: -1px;
+}
+
+.brand-biocoop {
+  color: #43832e;
+}
+
+.brand-biocoop b {
+  font: 900 18px/1 Arial, sans-serif;
+  letter-spacing: -0.8px;
+}
+
+.brand-naturalia {
+  color: #5c8a25;
+}
+
+.brand-naturalia b {
+  font: 800 15px/1 Arial, sans-serif;
+  letter-spacing: 0.4px;
+}
+
+.brand-lavieclaire {
+  color: #76952e;
+}
+
+.brand-lavieclaire b {
+  font: italic 800 16px/1 Georgia, serif;
+}
+
+.brand-casino,
+.brand-g20,
+.brand-diagonal {
+  color: #d71920;
+}
+
+.brand-casino b,
+.brand-g20 b,
+.brand-diagonal b {
+  font: 900 17px/1 Arial, sans-serif;
+}
+
+.brand-leafmarket,
+.brand-laptitedistrib,
+.brand-monepicerieparis {
+  color: #3d7b45;
+}
+
+.brand-biocbon {
+  color: #6b9e3a;
+}
+
+.brand-biocbon b,
+.brand-leafmarket b,
+.brand-laptitedistrib b,
+.brand-monepicerieparis b {
+  font: 800 14px/1.05 Arial, sans-serif;
+}
+
+.brand-nousantigaspi {
+  color: #cf4f37;
+  gap: 4px;
+}
+
+.brand-nousantigaspi b {
+  font: 900 16px/1 Arial, sans-serif;
+}
+
+.brand-nousantigaspi strong {
+  color: #4e873c;
+  font: 750 10px/1 Arial, sans-serif;
+}
+
+.brand-parisstore,
+.brand-mixmarkt {
+  color: #d6232a;
+}
+
+.brand-parisstore b,
+.brand-mixmarkt b {
+  font: 900 15px/1 Arial, sans-serif;
+}
+
+.brand-normal {
+  color: #195398;
+}
+
+.brand-pribon {
+  color: #e45025;
+}
+
+.brand-charliesmarket {
+  color: #593a76;
+}
+
+.chain-wordmark.text-only {
+  height: auto;
+  min-height: 22px;
+  justify-content: flex-start;
+}
+
+.chain-wordmark.text-only b,
+.chain-wordmark.text-only strong {
+  font-size: 15px;
+}
+
+.product-store-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--insta-line);
+}
+
+.product-store-label {
+  width: 100%;
+  color: var(--insta-muted);
+  font-size: 7px;
+  font-weight: 750;
+  letter-spacing: 0.55px;
+  text-transform: uppercase;
+}
+
+.product-store-source .chain-wordmark {
+  max-width: 100%;
+  flex: 1 1 auto;
+}
+
+.product-store-source .observed-date {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 8px;
+}
+
+.chain-brand-card .chain-wordmark {
+  max-width: 100%;
+}
+
+.chain-brand-card .chain-wordmark > b:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 * {
   box-sizing: border-box;
 }

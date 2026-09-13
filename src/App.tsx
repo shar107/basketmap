@@ -81,15 +81,81 @@ const viewFromPath = (): AppView => {
   if (path === "/results") return "results";
   return "home";
 };
-function ChainWordmark({ chain }: { chain: string }) {
-  const key=normalize(chain).replace(/[^a-z]/g,"");
-  if(chain==="Carrefour")return <span className={`chain-wordmark brand-${key}`}><i className="carrefour-symbol" aria-hidden="true"/><b>Carrefour</b></span>;
-  if(chain==="Auchan")return <span className={`chain-wordmark brand-${key}`}><i aria-hidden="true">A</i><b>Auchan</b></span>;
-  if(chain==="Intermarché")return <span className={`chain-wordmark brand-${key}`}><b>Inter</b><strong>marché</strong></span>;
-  if(chain==="Monoprix")return <span className={`chain-wordmark brand-${key}`}><b>MONOPRIX</b></span>;
-  if(chain==="Lidl")return <span className={`chain-wordmark brand-${key}`}><i className="lidl-symbol" aria-hidden="true">L<span>IDL</span></i><b>Lidl</b></span>;
-  if(chain==="E.Leclerc")return <span className={`chain-wordmark brand-${key}`}><i aria-hidden="true">E</i><b>Leclerc</b></span>;
-  return <span className={`chain-wordmark brand-${key}`}><i className="aldi-symbol" aria-hidden="true">A</i><b>ALDI</b></span>;
+function ChainWordmark({
+  chain,
+  textOnly = false,
+}: {
+  chain: string;
+  textOnly?: boolean;
+}) {
+  const key = normalize(chain).replace(/[^a-z0-9]/g, "");
+  let wordmark = <b>{chain}</b>;
+  if (chain === "Intermarché")
+    wordmark = (
+      <>
+        <b>Inter</b>
+        <strong>marché</strong>
+      </>
+    );
+  else if (chain === "Monoprix") wordmark = <b>MONOPRIX</b>;
+  else if (chain === "E.Leclerc") wordmark = <b>E.Leclerc</b>;
+  else if (chain === "ALDI") wordmark = <b>ALDI</b>;
+  else if (chain === "Super U")
+    wordmark = (
+      <>
+        <b>SUPER</b>
+        <strong>U</strong>
+      </>
+    );
+  else if (chain === "U Express")
+    wordmark = (
+      <>
+        <strong>U</strong>
+        <b>EXPRESS</b>
+      </>
+    );
+  else if (chain === "Franprix") wordmark = <b>franprix</b>;
+  else if (chain === "Biocoop") wordmark = <b>biocoop</b>;
+  else if (chain === "Naturalia") wordmark = <b>NATURALIA</b>;
+  else if (chain === "La Vie Claire") wordmark = <b>la vie claire</b>;
+  else if (chain === "Bio C' Bon") wordmark = <b>bio c’ bon</b>;
+  else if (chain === "NOUS anti-gaspi")
+    wordmark = (
+      <>
+        <b>NOUS</b>
+        <strong>anti-gaspi</strong>
+      </>
+    );
+
+  let symbol = null;
+  if (!textOnly && chain === "Carrefour")
+    symbol = <i className="carrefour-symbol" aria-hidden="true" />;
+  else if (!textOnly && chain === "Auchan")
+    symbol = <i aria-hidden="true">A</i>;
+  else if (!textOnly && chain === "Lidl")
+    symbol = (
+      <i className="lidl-symbol" aria-hidden="true">
+        L<span>IDL</span>
+      </i>
+    );
+  else if (!textOnly && chain === "E.Leclerc")
+    symbol = <i aria-hidden="true">E</i>;
+  else if (!textOnly && chain === "ALDI")
+    symbol = (
+      <i className="aldi-symbol" aria-hidden="true">
+        A
+      </i>
+    );
+
+  return (
+    <span
+      className={`chain-wordmark brand-${key} ${textOnly ? "text-only" : ""}`}
+      aria-label={chain}
+    >
+      {symbol}
+      {wordmark}
+    </span>
+  );
 }
 function ProductImage({
   item,
@@ -286,10 +352,29 @@ export default function App() {
         storeId:current.storeId||store.id,
       });
     });
-    return PRIORITY_CHAINS.map(chain=>({
-      chain,
-      ...(summaries.get(chain)||{branchCount:0,productCount:0,storeId:null}),
-    }));
+    const priorityRank = new Map(
+      PRIORITY_CHAINS.map((chain, index) => [chain, index]),
+    );
+    return [...summaries.entries()]
+      .map(([chain, summary]) => ({ chain, ...summary }))
+      .sort((left, right) => {
+        const leftRank = priorityRank.get(
+          left.chain as (typeof PRIORITY_CHAINS)[number],
+        );
+        const rightRank = priorityRank.get(
+          right.chain as (typeof PRIORITY_CHAINS)[number],
+        );
+        if (leftRank !== undefined || rightRank !== undefined)
+          return (
+            (leftRank ?? PRIORITY_CHAINS.length) -
+            (rightRank ?? PRIORITY_CHAINS.length)
+          );
+        return (
+          right.productCount - left.productCount ||
+          right.branchCount - left.branchCount ||
+          left.chain.localeCompare(right.chain)
+        );
+      });
   },[dataset.stores,discoveryComparisons,priceCounts]);
   async function refresh(codes: string[] = []) {
     request.current?.abort();
@@ -754,21 +839,19 @@ export default function App() {
                   <div className="chain-showcase-heading">
                     <div>
                       <h3>Supermarkets we cover</h3>
-                      <p>{discoveryComparisons.length} priced branches near {place.label}</p>
+                      <p>{chainCards.length} supermarket brands · {discoveryComparisons.length} priced branches near {place.label}</p>
                     </div>
                   </div>
                   <div className="chain-brand-grid">
                     {chainCards.map(card=>{
-                      const active=Boolean(card.storeId);
                       return <button
                         key={card.chain}
-                        className={`chain-brand-card ${active?"active":"unavailable"}`}
-                        disabled={!active}
+                        className="chain-brand-card active"
                         onClick={()=>card.storeId&&setSelectedId(card.storeId)}
-                        aria-label={active?`${card.chain}, ${card.branchCount} priced ${card.branchCount===1?"branch":"branches"}`:`${card.chain}, no eligible price data`}
+                        aria-label={`${card.chain}, ${card.branchCount} priced ${card.branchCount===1?"branch":"branches"}`}
                       >
                         <ChainWordmark chain={card.chain}/>
-                        <small>{active?`${card.branchCount} ${card.branchCount===1?"branch":"branches"}`:"No eligible price data"}</small>
+                        <small>{card.branchCount} {card.branchCount===1?"branch":"branches"} · {card.productCount} prices</small>
                       </button>;
                     })}
                   </div>
@@ -945,6 +1028,9 @@ export default function App() {
                         const cheapest = prices.find(
                           (p) => p.priceCents === min,
                         )!;
+                        const cheapestStore = dataset.stores.find(
+                          (store) => store.id === cheapest.storeId,
+                        );
                         return (
                           <article
                             className={`product-card ${item.id.startsWith("essential:") ? "comparable-product" : ""}`}
@@ -992,23 +1078,30 @@ export default function App() {
                                     ? "Recorded at one store · listed separately when needed"
                                     : `Recorded at ${prices.length} stores · shared totals update automatically`}
                               </p>
-                              <div
-                                className={`observed-date ${
-                                  isHistorical(cheapest.observedOn!)
-                                    ? "historical"
-                                    : ""
-                                }`}
-                              >
-                                Seen {shortDate(cheapest.observedOn!)} ·{" "}
-                                {
-                                  dataset.stores.find(
-                                    (s) => s.id === cheapest.storeId,
-                                  )?.chain
-                                }{" "}
-                                ·{" "}
-                                {isHistorical(cheapest.observedOn!)
-                                  ? "Historical"
-                                  : "Recent"}
+                              <div className="product-store-source">
+                                <span className="product-store-label">
+                                  {prices.length > 1
+                                    ? "Lowest observed at"
+                                    : "Observed at"}
+                                </span>
+                                {cheapestStore?.chain && (
+                                  <ChainWordmark
+                                    chain={cheapestStore.chain}
+                                    textOnly
+                                  />
+                                )}
+                                <span
+                                  className={`observed-date ${
+                                    isHistorical(cheapest.observedOn!)
+                                      ? "historical"
+                                      : ""
+                                  }`}
+                                >
+                                  Seen {shortDate(cheapest.observedOn!)} ·{" "}
+                                  {isHistorical(cheapest.observedOn!)
+                                    ? "Historical"
+                                    : "Recent"}
+                                </span>
                               </div>
                             </div>
                           </article>
