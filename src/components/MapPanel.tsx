@@ -62,13 +62,24 @@ function CoordinatePlot({
   onSelect: MapPanelProps["onSelect"];
 }) {
   const plotRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(900);
-  const height = width < 650 ? 360 : 420;
+  const [size, setSize] = useState({ width: 900, height: 420 });
+  const { width, height } = size;
   useEffect(() => {
     const element = plotRef.current;
     if (!element) return;
-    const resize = () =>
-      setWidth(Math.max(300, element.getBoundingClientRect().width));
+    const resize = () => {
+      const bounds = element.getBoundingClientRect();
+      const nextWidth = Math.max(300, Math.round(bounds.width));
+      const nextHeight = Math.max(
+        nextWidth < 650 ? 360 : 420,
+        Math.round(bounds.height),
+      );
+      setSize((current) =>
+        current.width === nextWidth && current.height === nextHeight
+          ? current
+          : { width: nextWidth, height: nextHeight },
+      );
+    };
     resize();
     if (typeof ResizeObserver !== "undefined") {
       const observer = new ResizeObserver(resize);

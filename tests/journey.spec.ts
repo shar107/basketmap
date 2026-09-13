@@ -301,9 +301,14 @@ test("homepage and result maps remain usable when map tiles fail", async ({
   ).toBe(true);
   const brandsBox = await brands.boundingBox();
   const mapBox = await mapCanvas.boundingBox();
+  const mapSurfaceBox = await mapCanvas
+    .locator(".bm-map-surface")
+    .boundingBox();
   expect(brandsBox).not.toBeNull();
   expect(mapBox).not.toBeNull();
+  expect(mapSurfaceBox).not.toBeNull();
   expect(mapBox!.x).toBeGreaterThan(brandsBox!.x);
+  expect(mapSurfaceBox!.height).toBeGreaterThan(brandsBox!.height * 0.75);
   const homepageToggle = homepageMap.getByRole("button", {
     name: "Use simplified map",
   });
