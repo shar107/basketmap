@@ -4,6 +4,9 @@ Personal site: https://sharad.fr/
 
 Live project: https://sharad.fr/projects/basketmap/
 
+Complete domain, DNS, GitHub Pages, deployment, and maintenance history:
+[docs/SHARAD_FR_COMPLETE_HISTORY_AND_OPERATIONS.md](docs/SHARAD_FR_COMPLETE_HISTORY_AND_OPERATIONS.md)
+
 The repository contains two independently built frontends:
 
 - `portfolio/` is the Astro personal site published at the domain root.
