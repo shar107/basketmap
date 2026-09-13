@@ -646,6 +646,10 @@ button:hover:not(:disabled) {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.observed-date.historical {
+  color: #9a672f;
+}
 .stepper {
   display: inline-flex;
   border: 1px solid #dfe5d6;

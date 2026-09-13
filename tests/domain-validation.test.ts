@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { demoDataset } from "../src/data";
 import {
   MAX_IMPORT_BYTES,
+  MAX_OBSERVATIONS,
   formatEuro,
   parseDatasetImport,
   parseEuroToCents,
@@ -126,10 +127,13 @@ describe("runtime dataset validation and atomic local import", () => {
     expect(result.success).toBe(false);
     if (!result.success) expect(result.errors[0].message).toContain("2 MB");
     const data = structuredClone(demoDataset);
-    data.observations = Array.from({ length: 5001 }, (_, index) => ({
-      ...data.observations[0],
-      id: `record-${index}`,
-    }));
+    data.observations = Array.from(
+      { length: MAX_OBSERVATIONS + 1 },
+      (_, index) => ({
+        ...data.observations[0],
+        id: `record-${index}`,
+      }),
+    );
     expect(validateDataset(data).success).toBe(false);
   });
   it("returns new validated data on success and never changes a working dataset on failure", () => {

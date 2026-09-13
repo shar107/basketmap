@@ -4,7 +4,7 @@ import { matchingReason } from "./matching";
 import type { Dataset, ValidationResult } from "./types";
 
 export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
-export const MAX_OBSERVATIONS = 5_000;
+export const MAX_OBSERVATIONS = 10_000;
 const id = z.string().trim().min(1).max(160);
 const label = z.string().trim().min(1).max(500);
 const text = z.string().max(5_000);

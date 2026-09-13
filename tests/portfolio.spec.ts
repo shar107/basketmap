@@ -66,7 +66,7 @@ test("offline bootstrap failure keeps navigation and recovery available", async 
   await page.route("https://prices.openfoodfacts.org/api/**", (r) => r.abort());
   await page.goto("/shop");
   await expect(
-    page.getByRole("heading", { name: "No recent prices in this area yet" }),
+    page.getByRole("heading", { name: "No eligible prices in this area yet" }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Change location", exact: true }),

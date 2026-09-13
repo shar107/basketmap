@@ -58,7 +58,7 @@ export default function ToolsPage({
         {
           origin: { lat: 48.853, lon: 2.369, label: "Bastille" },
           radiusKm: 3,
-          maxObservationAgeDays: 30,
+          maxObservationAgeDays: 90,
           asOfDate: parisDate(),
         },
       )
@@ -128,7 +128,7 @@ export default function ToolsPage({
                 <dt>All-item baskets</dt>
                 <dd>
                   {rankCompleteStores(previewComparisons).length} complete
-                  within 3 km of Bastille at a 30-day cutoff
+                  within 3 km of Bastille at a 90-day cutoff
                 </dd>
               </dl>
               <p>

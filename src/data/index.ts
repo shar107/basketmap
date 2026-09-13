@@ -59,6 +59,6 @@ export const presetBaskets: Array<{
 export const defaultSettings: ComparisonSettings = {
   origin: { lat: 48.853, lon: 2.369, label: "Bastille, Paris" },
   radiusKm: 3,
-  maxObservationAgeDays: 30,
+  maxObservationAgeDays: 90,
   asOfDate: parisDate(),
 };

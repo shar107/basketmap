@@ -4,13 +4,14 @@ import {
   CITIES,
   mergeMarkets,
   normalizePrices,
+  PRICE_HISTORY_DAYS,
   type Market,
 } from "../src/services/market";
 import { parisDate } from "../src/domain";
 const API = "https://prices.openfoodfacts.org/api/v1/";
 const asOf = parisDate(),
   cutoff = new Date(`${asOf}T12:00:00Z`);
-cutoff.setUTCDate(cutoff.getUTCDate() - 30);
+cutoff.setUTCDate(cutoff.getUTCDate() - PRICE_HISTORY_DAYS);
 async function get(
   path: string,
   params: URLSearchParams,

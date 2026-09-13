@@ -29,6 +29,8 @@ export type Market = {
 export const PARIS: Place = { label: "Paris", lat: 48.8566, lon: 2.3522 };
 export const LYON: Place = { label: "Lyon", lat: 45.764, lon: 4.8357 };
 export const CITIES: Place[] = [LYON, PARIS];
+export const PRICE_HISTORY_DAYS = 90;
+export const RECENT_PRICE_DAYS = 30;
 export const PRIORITY_CHAINS = [
   "Carrefour",
   "Auchan",
@@ -297,7 +299,7 @@ export function localDataset(
     .sort((a, b) => haversineKm(place, a) - haversineKm(place, b));
   const storeIds = new Set(stores.map((s) => s.id));
   const cutoff = new Date(`${asOf}T12:00:00Z`);
-  cutoff.setUTCDate(cutoff.getUTCDate() - 30);
+  cutoff.setUTCDate(cutoff.getUTCDate() - PRICE_HISTORY_DAYS);
   const observations = market.observations.filter(
     (o) =>
       storeIds.has(o.storeId) &&
@@ -483,7 +485,7 @@ export async function fetchPrices(
   const requestSignal = AbortSignal.any([signal, AbortSignal.timeout(55000)]);
   const asOf = parisDate();
   const cutoff = new Date(`${asOf}T12:00:00Z`);
-  cutoff.setUTCDate(cutoff.getUTCDate() - 30);
+  cutoff.setUTCDate(cutoff.getUTCDate() - PRICE_HISTORY_DAYS);
   const params = new URLSearchParams({
     currency: "EUR",
     type: "PRODUCT",

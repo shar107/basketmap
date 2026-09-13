@@ -9,12 +9,13 @@ BasketMap is a focused grocery-price comparison product for Lyon and Paris.
 Visitors choose a city, build a basket, compare complete totals across real
 supermarket branches, and then shop directly at the selected store.
 
-The current bootstrap contains 2,270 valid source-linked price observations,
-2,002 exact products, and 25 priced branches within 15 km of Lyon or Paris.
+The current bootstrap contains 6,846 valid source-linked price observations,
+5,470 exact products, and 90 priced branches within 15 km of Lyon or Paris.
 BasketMap requests newer Open Prices records when it opens and retains this
 bundled snapshot as an availability fallback. Prices are community-observed
-regular in-store records from the preceding 30 days; they are not live shelf
-inventory, and coverage and stock are not guaranteed.
+regular in-store records from the preceding 90 days. Observations older than 30
+days are marked historical; none are live shelf inventory, and coverage and
+stock are not guaranteed.
 
 ## Product behaviour
 
@@ -29,10 +30,10 @@ inventory, and coverage and stock are not guaranteed.
 - The catalog is a separate `/shop` view. Visitors must choose “Start your
   shopping list” before product search and basket-building controls appear.
 - Exact branded products remain searchable by name or barcode.
-- Comparable product groupings use real products only when their type and
-  displayed pack size match. Each branch uses one explicitly selected source
-  product and retains its original product label, observation date, barcode,
-  and evidence link.
+- Comparable product groupings use real products normalized to an explicitly
+  displayed standard quantity. Each branch uses one selected source product
+  and retains its original product label, source pack, source price,
+  observation date, barcode, and evidence link.
 - Any recorded product can be added directly. Products show whether they are
   shared across stores or may need to be listed separately.
 - When no two stores can price the full basket, BasketMap automatically totals
@@ -65,9 +66,11 @@ through `BASKETMAP_TEST_URL`.
 npm run sync:prices
 ```
 
-The refresh queries Open Prices separately for Lyon and Paris using stable
-ascending price IDs, validates every row, strips contributor identities, and
-replaces the snapshot only after valid observations are available.
+The refresh queries 90 days of Open Prices separately for Lyon and Paris using
+stable ascending price IDs, validates every row, strips contributor identities,
+and replaces the snapshot only after valid observations are available. A free
+GitHub Actions workflow runs this refresh daily and commits only a validated
+snapshot.
 
 Price observations require:
 

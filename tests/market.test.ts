@@ -7,6 +7,7 @@ import {
   localDataset,
   LYON,
   PARIS,
+  PRICE_HISTORY_DAYS,
   PRIORITY_CHAINS,
   fetchPrices,
   isPriorityChain,
@@ -79,9 +80,9 @@ describe("real price ingestion", () => {
         },
       }).images,
     ).toEqual({}));
-  it("uses a rolling 30 day cutoff; never turns old prices into current totals", () => {
+  it("uses a rolling 90 day cutoff; never turns older prices into current totals", () => {
     const m = make();
-    const d = localDataset(m, PARIS, 15, m.items, "2026-10-09");
+    const d = localDataset(m, PARIS, 15, m.items, "2026-12-08");
     expect(d.observations).toHaveLength(0);
     const c = compareBasket(
       d,
@@ -89,8 +90,8 @@ describe("real price ingestion", () => {
       {
         origin: PARIS,
         radiusKm: 15,
-        maxObservationAgeDays: 30,
-        asOfDate: "2026-10-09",
+        maxObservationAgeDays: PRICE_HISTORY_DAYS,
+        asOfDate: "2026-12-08",
       },
     );
     expect(c[0].completeTotalCents).toBeNull();
@@ -211,7 +212,7 @@ describe("published French snapshot", () => {
     expect([...chains].some((chain) => !isPriorityChain(chain))).toBe(true);
     expect(chains.size).toBeGreaterThanOrEqual(PRIORITY_CHAINS.length);
     for (const city of [LYON, PARIS]) {
-      const local = localDataset(m, city, 15, [], "2026-09-12");
+      const local = localDataset(m, city, 15, [], "2026-09-13");
       expect(local.observations.length).toBeGreaterThan(100);
       expect(
         local.items.some((item) => item.id.startsWith("essential:")),
@@ -219,7 +220,7 @@ describe("published French snapshot", () => {
     }
   });
   it("publishes honest comparable essentials with explicit product mappings", () => {
-    const lyon = localDataset(m, LYON, 15, [], "2026-09-12");
+    const lyon = localDataset(m, LYON, 15, [], "2026-09-13");
     const rice = lyon.items.find((item) => item.id === "essential:rice:500:g");
     expect(rice?.name).toBe("Rice · 500 g equivalent");
     const results = compareBasket(
@@ -228,8 +229,8 @@ describe("published French snapshot", () => {
       {
         origin: LYON,
         radiusKm: 15,
-        maxObservationAgeDays: 30,
-        asOfDate: "2026-09-12",
+        maxObservationAgeDays: PRICE_HISTORY_DAYS,
+        asOfDate: "2026-09-13",
       },
     );
     expect(

@@ -99,6 +99,39 @@ describe("essential product search", () => {
     ).toBeNull();
   });
 
+  it("classifies additional cupboard and drink staples without cosmetic false positives", () => {
+    expect(
+      essentialType(
+        item({
+          name: "Huile de tournesol",
+          packUnit: "ml",
+          packQuantity: 1000,
+        }),
+        ["en:vegetable-oils"],
+      ),
+    ).toBe("Cooking oil");
+    expect(
+      essentialType(
+        item({
+          name: "Eau micellaire",
+          packUnit: "ml",
+          packQuantity: 500,
+        }),
+        ["en:waters"],
+      ),
+    ).toBeNull();
+    expect(
+      essentialType(
+        item({
+          name: "Farine de blé",
+          packUnit: "g",
+          packQuantity: 1000,
+        }),
+        ["en:flours"],
+      ),
+    ).toBe("Flour");
+  });
+
   it("recovers count-based egg packs from source labels", () => {
     expect(
       resolvePack({

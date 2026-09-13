@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import {
   compareBasket,
+  ageInDays,
   formatEuro,
   haversineKm,
   parisDate,
@@ -35,7 +36,9 @@ import {
   CITIES,
   EMPTY_MARKET,
   LYON,
+  PRICE_HISTORY_DAYS,
   PRIORITY_CHAINS,
+  RECENT_PRICE_DAYS,
   fetchPrices,
   localDataset,
   mergeMarkets,
@@ -148,7 +151,7 @@ export default function App() {
       origin: place,
       radiusKm: radius,
       asOfDate: asOf,
-      maxObservationAgeDays: 30,
+      maxObservationAgeDays: PRICE_HISTORY_DAYS,
     }),
     [place, radius, asOf],
   );
@@ -161,6 +164,8 @@ export default function App() {
     [dataset, market.images],
   );
   const imagesFor = (item: CatalogItem) => productImages.get(item.id) || [];
+  const isHistorical = (date: string) =>
+    ageInDays(date, asOf) > RECENT_PRICE_DAYS;
   const offers = useMemo(() => {
     const map = new Map<string, PriceObservation[]>();
     const groups = new Map<string, PriceObservation[]>();
@@ -300,7 +305,7 @@ export default function App() {
       setNotice(
         result.market.observations.length
           ? ""
-          : "No additional recent prices found in this area.",
+          : "No additional eligible prices found in this area.",
       );
     } catch {
       if (!controller.signal.aborted)
@@ -677,8 +682,8 @@ export default function App() {
                   Start your shopping list <ArrowRight size={18} />
                 </a>
                 <span className="hero-freshness">
-                  Observed prices from the last 30 days. Coverage and
-                  availability vary by store.
+                  Latest available observations from the last 90 days. Records
+                  older than 30 days are clearly marked historical.
                 </span>
               </div>
               <div className="hero-stage">
@@ -700,7 +705,7 @@ export default function App() {
                     <b>01</b>
                     <span>
                       <strong>Choose your area</strong>
-                      <p>Browse recent price records around Lyon or Paris.</p>
+                      <p>Browse price records from the last 90 days around Lyon or Paris.</p>
                     </span>
                   </div>
                   <div>
@@ -726,7 +731,7 @@ export default function App() {
             >
               <div className="map-intro">
                 <div>
-                  <span className="eyebrow">SUPERMARKETS WITH RECENT PRICES</span>
+                  <span className="eyebrow">SUPERMARKETS WITH ELIGIBLE PRICES</span>
                   <h2>Explore {place.label}.</h2>
                   <p>
                     Choose a supermarket brand or select a map marker.
@@ -760,10 +765,10 @@ export default function App() {
                         className={`chain-brand-card ${active?"active":"unavailable"}`}
                         disabled={!active}
                         onClick={()=>card.storeId&&setSelectedId(card.storeId)}
-                        aria-label={active?`${card.chain}, ${card.branchCount} priced ${card.branchCount===1?"branch":"branches"}`:`${card.chain}, no recent price data`}
+                        aria-label={active?`${card.chain}, ${card.branchCount} priced ${card.branchCount===1?"branch":"branches"}`:`${card.chain}, no eligible price data`}
                       >
                         <ChainWordmark chain={card.chain}/>
-                        <small>{active?`${card.branchCount} ${card.branchCount===1?"branch":"branches"}`:"No recent price data"}</small>
+                        <small>{active?`${card.branchCount} ${card.branchCount===1?"branch":"branches"}`:"No eligible price data"}</small>
                       </button>;
                     })}
                   </div>
@@ -835,8 +840,8 @@ export default function App() {
                   </select>
                 </label>
                 <span>
-                  Distances are straight-line. Prices observed in the last 30
-                  days.
+                  Distances are straight-line. Latest prices from the last 90
+                  days; observations older than 30 days are historical.
                 </span>
               </div>
             )}
@@ -844,12 +849,12 @@ export default function App() {
               <span className={refreshing ? "" : "green-dot"} />
               {refreshing ? (
                 <>
-                  <LoaderCircle size={13} className="spin" /> Checking recent
+                  <LoaderCircle size={13} className="spin" /> Checking latest
                   prices…
                 </>
               ) : (
                 <>
-                  {pricedStores.size} stores with recent prices near{" "}
+                  {pricedStores.size} stores with eligible prices near{" "}
                   {place.label}
                 </>
               )}
@@ -987,13 +992,23 @@ export default function App() {
                                     ? "Recorded at one store · listed separately when needed"
                                     : `Recorded at ${prices.length} stores · shared totals update automatically`}
                               </p>
-                              <div className="observed-date">
+                              <div
+                                className={`observed-date ${
+                                  isHistorical(cheapest.observedOn!)
+                                    ? "historical"
+                                    : ""
+                                }`}
+                              >
                                 Seen {shortDate(cheapest.observedOn!)} ·{" "}
                                 {
                                   dataset.stores.find(
                                     (s) => s.id === cheapest.storeId,
                                   )?.chain
-                                }
+                                }{" "}
+                                ·{" "}
+                                {isHistorical(cheapest.observedOn!)
+                                  ? "Historical"
+                                  : "Recent"}
                               </div>
                             </div>
                           </article>
@@ -1010,7 +1025,7 @@ export default function App() {
                     )}
                     <p className="product-count">
                       {Math.min(limit, filtered.length)} of {filtered.length}{" "}
-                      products with recent prices
+                      products with eligible prices
                     </p>
                   </>
                 ) : (
@@ -1019,7 +1034,7 @@ export default function App() {
                     <h3>
                       {search
                         ? "No matching product prices yet"
-                        : "No recent prices in this area yet"}
+                        : "No eligible prices in this area yet"}
                     </h3>
                     <p>
                       {search
@@ -1218,7 +1233,9 @@ export default function App() {
                       </p>
                     )}
                     <p className="results-footnote">
-                      Observed prices can change. Stock may vary.
+                      BasketMap uses the latest eligible observation within 90
+                      days. Records older than 30 days are historical. Prices
+                      can change and stock may vary.
                     </p>
                     {results.length > 0 && (
                       <button
@@ -1401,12 +1418,12 @@ export default function App() {
             <span className="eyebrow">YOUR BASKET AT</span>
             <h2 id="detail-title">{selectedStore.name}</h2>
             <p>{selectedStore.address}</p>
-            {!basket.length?<><div className="store-discovery-summary"><strong>{priceCounts[selectedStore.id]||0}</strong><span>products with recent recorded prices</span></div><p className="catalog-explanation">A price record is not a stock check. Build your basket to see whether the same products can be compared across stores.</p><button className="primary" onClick={()=>{setBrowseStore(selectedStore.id);setSelectedId(null);navigate('shop');}}>Browse this store’s products <ArrowRight size={16}/></button></>:<>
+            {!basket.length?<><div className="store-discovery-summary"><strong>{priceCounts[selectedStore.id]||0}</strong><span>products with eligible recorded prices</span></div><p className="catalog-explanation">A price record is not a stock check. Build your basket to see whether the same products can be compared across stores.</p><button className="primary" onClick={()=>{setBrowseStore(selectedStore.id);setSelectedId(null);navigate('shop');}}>Browse this store’s products <ArrowRight size={16}/></button></>:<>
             <div className="detail-total"><span>{selected.status==='complete'?(isSharedComparison?'Shared products total':'Full basket'):`${selected.matchedLineCount} of ${comparisonBasket.length} products priced`}</span><strong>{selected.matchedLineCount?formatEuro(selected.status==='complete'?selected.completeTotalCents!:selected.knownSubtotalCents):'Unavailable'}</strong></div>
             {isSharedComparison&&<p className="subset-notice">This total covers {comparisonBasket.length} shared {comparisonBasket.length === 1 ? "product" : "products"}. The other {excludedBasketLines.length} {excludedBasketLines.length === 1 ? "product is" : "products are"} listed separately in the comparison.</p>}
-            {selected.status!=='complete'&&<div className="coverage-message"><div><h3>This is not a full basket price.</h3><p>{selected.missingItemIds.length} products have no recent price here. Your shopping list stays saved.</p><button className="primary" onClick={()=>{setSelectedId(null);navigate('shop');setBasketOpen(true);}}>Edit my basket</button></div></div>}
-            <div className="detail-lines">{selected.lines.filter(l=>l.observation).map(line=>{const observation=line.observation!;return <div key={line.itemId}><div><strong>{line.item.name}</strong><span>{observation.productLabel}{observation.matchBasis==="normalized_unit" ? ` · observed ${observation.sourcePackLabel} at ${formatEuro(observation.sourcePriceCents!)}` : ` · ${line.quantity} × ${line.item.packLabel}`}</span><small>{observation.matchBasis==="normalized_unit"?"Equivalent price · ":""}Observed {shortDate(observation.observedOn!)} · <a href={observation.source.recordUrl!} target="_blank" rel="noreferrer">Price record <ArrowUpRight size={10}/></a></small></div><b>{formatEuro(line.lineTotalCents!)}</b></div>})}</div>
-            {selected.missingItemIds.length>0&&<details className="missing-products"><summary>{selected.missingItemIds.length} products without recent prices</summary><ul>{selected.lines.filter(l=>!l.observation).map(l=><li key={l.itemId}>{l.item.name} · {l.item.packLabel}</li>)}</ul></details>}
+            {selected.status!=='complete'&&<div className="coverage-message"><div><h3>This is not a full basket price.</h3><p>{selected.missingItemIds.length} products have no eligible price here. Your shopping list stays saved.</p><button className="primary" onClick={()=>{setSelectedId(null);navigate('shop');setBasketOpen(true);}}>Edit my basket</button></div></div>}
+            <div className="detail-lines">{selected.lines.filter(l=>l.observation).map(line=>{const observation=line.observation!;return <div key={line.itemId}><div><strong>{line.item.name}</strong><span>{observation.productLabel}{observation.matchBasis==="normalized_unit" ? ` · observed ${observation.sourcePackLabel} at ${formatEuro(observation.sourcePriceCents!)}` : ` · ${line.quantity} × ${line.item.packLabel}`}</span><small>{observation.matchBasis==="normalized_unit"?"Equivalent price · ":""}{isHistorical(observation.observedOn!)?"Historical":"Recent"} observation {shortDate(observation.observedOn!)} · <a href={observation.source.recordUrl!} target="_blank" rel="noreferrer">Price record <ArrowUpRight size={10}/></a></small></div><b>{formatEuro(line.lineTotalCents!)}</b></div>})}</div>
+            {selected.missingItemIds.length>0&&<details className="missing-products"><summary>{selected.missingItemIds.length} products without eligible prices</summary><ul>{selected.lines.filter(l=>!l.observation).map(l=><li key={l.itemId}>{l.item.name} · {l.item.packLabel}</li>)}</ul></details>}
             {selected.status==='complete'&&!isSharedComparison&&<a className="primary directions" href={`https://www.google.com/maps/dir/?api=1&destination=${selectedStore.lat},${selectedStore.lon}`} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={17}/></a>}
             </>}
             <p className="detail-disclaimer">

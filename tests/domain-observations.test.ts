@@ -9,7 +9,11 @@ import {
   validateDataset,
 } from "../src/domain";
 import type { Dataset, PriceObservation } from "../src/domain";
-const settings = { ...defaultSettings, asOfDate: "2026-09-12" };
+  const settings = {
+    ...defaultSettings,
+    asOfDate: "2026-09-12",
+    maxObservationAgeDays: 30,
+  };
 function observedFixture(): Dataset {
   const item = {
     ...structuredClone(demoDataset.items[0]),

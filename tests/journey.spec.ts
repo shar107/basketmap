@@ -91,7 +91,7 @@ test("comparison-ready products produce real complete branch totals and evidence
     .first()
     .getByRole("button", { name: "View basket" })
     .click();
-  await expect(page.getByRole("dialog")).toContainText("Observed");
+  await expect(page.getByRole("dialog")).toContainText(/Recent observation|Historical observation/);
   await expect(
     page.getByRole("link", { name: "Price record" }),
   ).toHaveAttribute("href", /prices.openfoodfacts.org\/prices\/\d+/);
@@ -182,10 +182,8 @@ test("store-specific products are added directly and excluded from shared totals
   await expect(
     page.locator(".basket-coverage"),
   ).toContainText(/compared · \d+ not compared/);
-  await expect(
-    page.locator(".results-footnote"),
-  ).toHaveText(
-    "Observed prices can change. Stock may vary.",
+  await expect(page.locator(".results-footnote")).toHaveText(
+    "BasketMap uses the latest eligible observation within 90 days. Records older than 30 days are historical. Prices can change and stock may vary.",
   );
   expect(await page.locator(".store-card").count()).toBeGreaterThanOrEqual(2);
   await expect(page.locator(".best-label").first()).toContainText(
@@ -272,7 +270,7 @@ test("homepage and result maps remain usable when map tiles fail", async ({
   const mapCanvas = homepageMap.locator(".homepage-map-canvas");
   await expect(brands.locator(".chain-brand-card")).toHaveCount(7);
   await expect(
-    brands.getByRole("button", { name: /ALDI, no recent price data/ }),
+    brands.getByRole("button", { name: /ALDI, no eligible price data/ }),
   ).toBeDisabled();
   for (const chain of [
     "Carrefour",
@@ -309,7 +307,7 @@ test("homepage and result maps remain usable when map tiles fail", async ({
     .first()
     .click();
   await expect(page.getByRole("dialog")).toContainText(
-    "products with recent recorded prices",
+    "products with eligible recorded prices",
   );
   await page.getByRole("button", { name: "Close store details" }).click();
 
