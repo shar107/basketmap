@@ -10,6 +10,7 @@ import {
   PRIORITY_CHAINS,
   fetchPrices,
   isPriorityChain,
+  isSupportedChain,
 } from "../src/services/market";
 import type { Market } from "../src/services/market";
 import {
@@ -113,8 +114,8 @@ describe("real price ingestion", () => {
     ).toBeNull();
     expect(normalizeStore({ id: "demo-a" })).toBeNull();
   });
-  it("keeps live prices only from the priority supermarket network", () => {
-    const excluded = make({
+  it("keeps valid grocery prices outside the featured-chain shortlist", () => {
+    const included = make({
       ...fixture,
       location: {
         ...fixture.location,
@@ -122,8 +123,8 @@ describe("real price ingestion", () => {
         osm_brand: "Super U",
       },
     });
-    expect(excluded.stores).toHaveLength(0);
-    expect(excluded.observations).toHaveLength(0);
+    expect(included.stores[0].chain).toBe("Super U");
+    expect(included.observations).toHaveLength(1);
   });
   it("fetches subsequent pages and normalizes live responses", async () => {
     const fetch = vi
@@ -183,9 +184,9 @@ describe("published French snapshot", () => {
     }
     expect(m.observations.length).toBeGreaterThan(2000);
     expect(m.stores.length).toBeGreaterThanOrEqual(20);
-    expect(m.stores.every((store) => isPriorityChain(store.chain))).toBe(true);
+    expect(m.stores.every((store) => isSupportedChain(store.chain))).toBe(true);
     expect(m.stores.some((store) => /super u|u express/i.test(store.name))).toBe(
-      false,
+      true,
     );
     expect(
       m.stores.every((store) =>
@@ -207,12 +208,8 @@ describe("published French snapshot", () => {
       "E.Leclerc",
     ])
       expect(chains.has(name)).toBe(true);
-    expect(
-      [...chains].every((chain) =>
-        PRIORITY_CHAINS.includes(chain as (typeof PRIORITY_CHAINS)[number]),
-      ),
-    ).toBe(true);
-    expect(chains.size).toBeGreaterThanOrEqual(6);
+    expect([...chains].some((chain) => !isPriorityChain(chain))).toBe(true);
+    expect(chains.size).toBeGreaterThanOrEqual(PRIORITY_CHAINS.length);
     for (const city of [LYON, PARIS]) {
       const local = localDataset(m, city, 15, [], "2026-09-12");
       expect(local.observations.length).toBeGreaterThan(100);
@@ -224,7 +221,7 @@ describe("published French snapshot", () => {
   it("publishes honest comparable essentials with explicit product mappings", () => {
     const lyon = localDataset(m, LYON, 15, [], "2026-09-12");
     const rice = lyon.items.find((item) => item.id === "essential:rice:500:g");
-    expect(rice?.name).toBe("Rice · 500 g");
+    expect(rice?.name).toBe("Rice · 500 g equivalent");
     const results = compareBasket(
       lyon,
       [{ itemId: rice!.id, quantity: 1 }],
@@ -243,7 +240,10 @@ describe("published French snapshot", () => {
         .filter((observation) => observation.itemId === rice!.id)
         .every(
           (observation) =>
-            observation.matchBasis === "curated_spec" &&
+            observation.matchBasis === "normalized_unit" &&
+            observation.priceBasis === "quantity_equivalent" &&
+            observation.sourcePackQuantity &&
+            observation.sourcePriceCents &&
             observation.productCode &&
             observation.source.recordUrl,
         ),

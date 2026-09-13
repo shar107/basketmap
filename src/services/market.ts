@@ -41,6 +41,9 @@ export const PRIORITY_CHAINS = [
 const PRIORITY_CHAIN_SET = new Set<string>(PRIORITY_CHAINS);
 export const isPriorityChain = (chain: string | null | undefined) =>
   Boolean(chain && PRIORITY_CHAIN_SET.has(chain));
+/** Any validated physical grocery location is eligible for price ingestion. */
+export const isSupportedChain = (chain: string | null | undefined) =>
+  Boolean(chain?.trim());
 export const SOURCES = [
   {
     name: "Open Prices",
@@ -120,6 +123,15 @@ export function chainName(name: string): string {
     ["u express", "U Express"],
     ["casino", "Casino"],
     ["netto", "Netto"],
+    ["biocoop", "Biocoop"],
+    ["g20", "G20"],
+    ["cora", "Cora"],
+    ["grand frais", "Grand Frais"],
+    ["leader price", "Leader Price"],
+    ["match", "Match"],
+    ["naturalia", "Naturalia"],
+    ["spar", "Spar"],
+    ["vival", "Vival"],
   ].find(([key]) => name.toLowerCase().includes(key));
   return match?.[1] || name;
 }
@@ -172,7 +184,7 @@ export function normalizePrices(
     const store = normalizeStore(x.location);
     if (
       !store ||
-      !isPriorityChain(store.chain) ||
+      !isSupportedChain(store.chain) ||
       x.date > asOf ||
       x.proof.location_id !== x.location.id ||
       x.proof.receipt_online_delivery_costs != null ||
@@ -280,7 +292,7 @@ export function localDataset(
 ): Dataset {
   const stores = market.stores
     .filter(
-      (s) => isPriorityChain(s.chain) && haversineKm(place, s) <= radius,
+      (s) => isSupportedChain(s.chain) && haversineKm(place, s) <= radius,
     )
     .sort((a, b) => haversineKm(place, a) - haversineKm(place, b));
   const storeIds = new Set(stores.map((s) => s.id));
@@ -310,8 +322,9 @@ export function localDataset(
     const matchingItems = exactItems.filter(
       (item) =>
         essentialType(item) === specification.essential &&
-        item.packQuantity === specification.packQuantity &&
-        item.packUnit === specification.packUnit,
+        item.packUnit === specification.packUnit &&
+        item.packQuantity >= specification.sourceQuantityRange[0] &&
+        item.packQuantity <= specification.sourceQuantityRange[1],
     );
     const matchingIds = new Set(matchingItems.map((item) => item.id));
     const byStore = new Map<string, PriceObservation[]>();
@@ -351,7 +364,11 @@ export function localDataset(
                 productCode,
                 rows,
                 latestDate,
-                priceCents: latestRows[0].priceCents,
+                priceCents: Math.round(
+                  (latestRows[0].priceCents * specification.packQuantity) /
+                    matchingItems.find((item) => item.id === productCode)!
+                      .packQuantity,
+                ),
               },
             ]
           : [];
@@ -392,20 +409,31 @@ export function localDataset(
         storeId,
         productCode,
         decision:
-          "Lowest latest regular price among source-linked products matching this displayed essential and pack size.",
+          "Lowest latest quantity-equivalent regular price among source-linked products matching this essential type.",
       });
       rows.forEach((row) => {
         const originalItem = exactItemsById.get(row.itemId)!;
         comparableObservations.push({
           ...row,
-          id: `curated:${item.id}:${row.id}`,
+          id: `normalized:${item.id}:${row.id}`,
           itemId: item.id,
           productLabel: originalItem.name,
+          packQuantity: item.packQuantity,
+          packUnit: item.packUnit,
           packLabel: item.packLabel,
           attributes: [...item.requiredAttributes],
-          matchBasis: "curated_spec",
+          priceCents: Math.round(
+            (row.priceCents * item.packQuantity) /
+              originalItem.packQuantity,
+          ),
+          priceBasis: "quantity_equivalent",
+          sourcePackQuantity: originalItem.packQuantity,
+          sourcePackUnit: originalItem.packUnit,
+          sourcePackLabel: originalItem.packLabel,
+          sourcePriceCents: row.priceCents,
+          matchBasis: "normalized_unit",
           matchNote:
-            "Same essential type and displayed pack size. BasketMap selected the lowest latest regular source-linked product at this branch.",
+            `Quantity-equivalent ${item.packLabel} calculated from the observed ${originalItem.packLabel} source pack. BasketMap selected the lowest latest normalized regular price at this branch.`,
         });
       });
     });

@@ -211,7 +211,12 @@ export default function App() {
     return [line.itemId,labels] as const;
   })),[basket,dataset.stores,offers]);
   const additionCoverage=useMemo(()=>new Map(dataset.items.map(i=>[i.id,candidateCoverage(i.id,basket,offers)])),[dataset.items,basket,offers]);
-  const catalog=useMemo(()=>dataset.items.filter(i=>offers.has(i.id)).sort((a,b)=>Number(!!essentialType(b))-Number(!!essentialType(a))||(offers.get(b.id)?.length||0)-(offers.get(a.id)?.length||0)||a.name.localeCompare(b.name)),[dataset,offers]);
+  const catalog=useMemo(()=>dataset.items.filter(i=>offers.has(i.id)).sort((a,b)=>{
+    const aStores=offers.get(a.id)?.length||0,bStores=offers.get(b.id)?.length||0;
+    const aRank=a.id.startsWith("essential:")&&aStores>=2?3:aStores>=2?2:0;
+    const bRank=b.id.startsWith("essential:")&&bStores>=2?3:bStores>=2?2:0;
+    return bRank-aRank||bStores-aStores||Number(!!essentialType(b))-Number(!!essentialType(a))||a.name.localeCompare(b.name);
+  }),[dataset,offers]);
   const heroProducts=catalog.filter(item=>imagesFor(item).length>0).slice(0,3);
   const filtered=catalog.filter(i=>(category==='All products'||i.category===category)&&searchScore(i,search)>0&&(!browseStore||offers.get(i.id)?.some(o=>o.storeId===browseStore)));
   const complete = comparisons
@@ -892,10 +897,10 @@ export default function App() {
                   )}
                 </div>
                 <p className="catalog-explanation">
-                  Search the products that have recent prices near {place.label}.
-                  If stores do not share every item, BasketMap compares the
-                  largest shared part of your basket and lists store-specific
-                  products separately.
+                  Comparison-ready staples and products shared by several
+                  stores appear first. Standard-quantity equivalents retain
+                  the original observed pack and price; store-only products
+                  remain available below.
                 </p>
                 {browseStore && (
                   <div className="service-notice store-filter-notice">
@@ -961,7 +966,9 @@ export default function App() {
                               <div className="product-price-row">
                                 <div>
                                   <span className="from-label">
-                                    {prices.length > 1
+                                    {item.id.startsWith("essential:")
+                                      ? "Equivalent from"
+                                      : prices.length > 1
                                       ? "From"
                                       : "Observed price"}
                                   </span>
@@ -972,7 +979,9 @@ export default function App() {
                               <p
                                 className={`product-coverage ${(additionCoverage.get(item.id) || 0) < 2 ? "limited" : ""}`}
                               >
-                                {(additionCoverage.get(item.id) || 0) >= 2
+                                {item.id.startsWith("essential:") && prices.length >= 2
+                                  ? `Standard quantity compared across ${prices.length} stores`
+                                  : (additionCoverage.get(item.id) || 0) >= 2
                                   ? `Shared with your basket at ${additionCoverage.get(item.id)} stores`
                                   : prices.length === 1
                                     ? "Recorded at one store · listed separately when needed"
@@ -1396,7 +1405,7 @@ export default function App() {
             <div className="detail-total"><span>{selected.status==='complete'?(isSharedComparison?'Shared products total':'Full basket'):`${selected.matchedLineCount} of ${comparisonBasket.length} products priced`}</span><strong>{selected.matchedLineCount?formatEuro(selected.status==='complete'?selected.completeTotalCents!:selected.knownSubtotalCents):'Unavailable'}</strong></div>
             {isSharedComparison&&<p className="subset-notice">This total covers {comparisonBasket.length} shared {comparisonBasket.length === 1 ? "product" : "products"}. The other {excludedBasketLines.length} {excludedBasketLines.length === 1 ? "product is" : "products are"} listed separately in the comparison.</p>}
             {selected.status!=='complete'&&<div className="coverage-message"><div><h3>This is not a full basket price.</h3><p>{selected.missingItemIds.length} products have no recent price here. Your shopping list stays saved.</p><button className="primary" onClick={()=>{setSelectedId(null);navigate('shop');setBasketOpen(true);}}>Edit my basket</button></div></div>}
-            <div className="detail-lines">{selected.lines.filter(l=>l.observation).map(line=><div key={line.itemId}><div><strong>{line.item.name}</strong><span>{line.observation!.productLabel}{line.item.id.startsWith("essential:") ? ` · ${line.item.packLabel}` : ` · ${line.quantity} × ${line.item.packLabel}`}</span><small>Observed {shortDate(line.observation!.observedOn!)} · <a href={line.observation!.source.recordUrl!} target="_blank" rel="noreferrer">Price record <ArrowUpRight size={10}/></a></small></div><b>{formatEuro(line.lineTotalCents!)}</b></div>)}</div>
+            <div className="detail-lines">{selected.lines.filter(l=>l.observation).map(line=>{const observation=line.observation!;return <div key={line.itemId}><div><strong>{line.item.name}</strong><span>{observation.productLabel}{observation.matchBasis==="normalized_unit" ? ` · observed ${observation.sourcePackLabel} at ${formatEuro(observation.sourcePriceCents!)}` : ` · ${line.quantity} × ${line.item.packLabel}`}</span><small>{observation.matchBasis==="normalized_unit"?"Equivalent price · ":""}Observed {shortDate(observation.observedOn!)} · <a href={observation.source.recordUrl!} target="_blank" rel="noreferrer">Price record <ArrowUpRight size={10}/></a></small></div><b>{formatEuro(line.lineTotalCents!)}</b></div>})}</div>
             {selected.missingItemIds.length>0&&<details className="missing-products"><summary>{selected.missingItemIds.length} products without recent prices</summary><ul>{selected.lines.filter(l=>!l.observation).map(l=><li key={l.itemId}>{l.item.name} · {l.item.packLabel}</li>)}</ul></details>}
             {selected.status==='complete'&&!isSharedComparison&&<a className="primary directions" href={`https://www.google.com/maps/dir/?api=1&destination=${selectedStore.lat},${selectedStore.lon}`} target="_blank" rel="noreferrer">Get directions <ArrowUpRight size={17}/></a>}
             </>}

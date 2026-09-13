@@ -1,6 +1,10 @@
 export type DatasetMode = "demo" | "observed";
 export type BaseUnit = "g" | "ml" | "count";
-export type MatchBasis = "demo_spec" | "exact_barcode" | "curated_spec";
+export type MatchBasis =
+  | "demo_spec"
+  | "exact_barcode"
+  | "curated_spec"
+  | "normalized_unit";
 export type Verification = "synthetic" | "source_linked" | "human_checked";
 
 export interface CatalogItem {
@@ -45,7 +49,12 @@ export interface PriceObservation {
   attributes?: string[];
   priceCents: number;
   currency: "EUR";
-  priceBasis: "pack";
+  priceBasis: "pack" | "quantity_equivalent";
+  /** Original observed pack retained when priceCents is quantity-normalized. */
+  sourcePackQuantity?: number;
+  sourcePackUnit?: BaseUnit;
+  sourcePackLabel?: string;
+  sourcePriceCents?: number;
   channel: "in_store" | "online" | "unknown";
   condition: "regular" | "promotion" | "loyalty" | "multibuy" | "unknown";
   matchBasis: MatchBasis;

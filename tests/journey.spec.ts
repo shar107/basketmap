@@ -205,10 +205,8 @@ test("milk search returns milk rather than milk chocolate", async ({ page }) => 
     "Search recorded products or enter a barcode",
   );
   await search.fill("milk");
-  await expect(page.locator(".shopping-main")).toContainText(
-    "No matching product prices yet",
-  );
-  await expect(page.locator(".shopping-main")).not.toContainText(
+  await expect(page.locator(".product-card").first()).toContainText(/Milk|Lait/);
+  await expect(page.locator(".product-grid")).not.toContainText(
     /milk chocolate|chocolat au lait/i,
   );
 

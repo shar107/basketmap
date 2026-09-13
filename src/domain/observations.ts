@@ -16,8 +16,15 @@ function exclusionReason(
 ): string | null {
   const mismatch = matchingReason(item, observation);
   if (mismatch) return mismatch;
-  if (observation.currency !== "EUR" || observation.priceBasis !== "pack")
-    return "Only EUR prices for one defined pack are eligible.";
+  if (observation.currency !== "EUR")
+    return "Only EUR prices are eligible.";
+  if (
+    (observation.matchBasis === "normalized_unit" &&
+      observation.priceBasis !== "quantity_equivalent") ||
+    (observation.matchBasis !== "normalized_unit" &&
+      observation.priceBasis !== "pack")
+  )
+    return "The observation price basis does not match its product matching method.";
   if (
     !Number.isSafeInteger(observation.priceCents) ||
     observation.priceCents <= 0 ||
@@ -93,7 +100,9 @@ export function selectObservation(
         : "No price is recorded for this item at this store.",
     );
   if (
-    eligible.some((observation) => observation.matchBasis === "curated_spec")
+    eligible.some((observation) =>
+      ["curated_spec", "normalized_unit"].includes(observation.matchBasis),
+    )
   ) {
     const mapping = dataset.selectedProducts?.find(
       (candidate) =>

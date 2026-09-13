@@ -81,7 +81,11 @@ export const observationSchema = z
       .positive()
       .max(100_000, "A grocery pack cannot exceed €1,000 in this version."),
     currency: z.literal("EUR"),
-    priceBasis: z.literal("pack"),
+    priceBasis: z.enum(["pack", "quantity_equivalent"]),
+    sourcePackQuantity: quantity.optional(),
+    sourcePackUnit: unit.optional(),
+    sourcePackLabel: label.optional(),
+    sourcePriceCents: z.number().int().positive().max(100_000).optional(),
     channel: z.enum(["in_store", "online", "unknown"]),
     condition: z.enum([
       "regular",
@@ -90,7 +94,12 @@ export const observationSchema = z
       "multibuy",
       "unknown",
     ]),
-    matchBasis: z.enum(["demo_spec", "exact_barcode", "curated_spec"]),
+    matchBasis: z.enum([
+      "demo_spec",
+      "exact_barcode",
+      "curated_spec",
+      "normalized_unit",
+    ]),
     matchNote: text,
     observedOn: calendarDate.nullable(),
     retrievedAt: timestamp.nullable(),
@@ -118,7 +127,7 @@ const baseDatasetSchema = z
       .array(z.object({ name: label, url: sourceUrl, license: label }).strict())
       .max(30),
     stores: z.array(storeSchema).min(1).max(250),
-    items: z.array(catalogItemSchema).min(1).max(500),
+    items: z.array(catalogItemSchema).min(1).max(10_000),
     observations: z.array(observationSchema).max(MAX_OBSERVATIONS),
     selectedProducts: z
       .array(
@@ -219,7 +228,9 @@ export const datasetSchema = baseDatasetSchema.superRefine((data, context) => {
           observation.itemId === mapping.itemId &&
           observation.storeId === mapping.storeId &&
           observation.productCode === mapping.productCode &&
-          observation.matchBasis === "curated_spec",
+          ["curated_spec", "normalized_unit"].includes(
+            observation.matchBasis,
+          ),
       )
     )
       issue(

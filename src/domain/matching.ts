@@ -15,6 +15,29 @@ export function matchingReason(
     canonical(observation.packLabel) !== canonical(item.packLabel)
   )
     return "Package format differs from the catalog pack.";
+  if (observation.matchBasis === "normalized_unit") {
+    if (!observation.matchNote.trim())
+      return "Normalized matching requires a recorded normalization decision.";
+    if (!observation.productCode)
+      return "Normalized matching requires an explicit source product identity.";
+    if (observation.priceBasis !== "quantity_equivalent")
+      return "Normalized matching requires a quantity-equivalent price basis.";
+    if (
+      observation.sourcePackQuantity === undefined ||
+      observation.sourcePackUnit === undefined ||
+      observation.sourcePackLabel === undefined ||
+      observation.sourcePriceCents === undefined
+    )
+      return "Normalized matching must retain the original observed pack and price.";
+    if (observation.sourcePackUnit !== item.packUnit)
+      return "The source pack unit cannot be normalized to this catalog unit.";
+    const expectedPrice = Math.round(
+      (observation.sourcePriceCents * item.packQuantity) /
+        observation.sourcePackQuantity,
+    );
+    if (expectedPrice !== observation.priceCents)
+      return "The quantity-equivalent price does not match the retained source pack price.";
+  }
   if (
     observation.matchBasis === "exact_barcode" &&
     (!item.barcode || item.barcode !== observation.productCode)

@@ -218,6 +218,36 @@ describe("eligible observations", () => {
     expect(validateDataset(dataset).success).toBe(true);
     expect(select(dataset).observation?.priceCents).toBe(120);
   });
+  it("accepts a traceable quantity-equivalent price and verifies its calculation", () => {
+    const dataset = observedFixture();
+    dataset.items[0].barcode = null;
+    dataset.items[0].packLabel = "1 L equivalent";
+    dataset.observations[0] = {
+      ...dataset.observations[0],
+      packLabel: "1 L equivalent",
+      priceCents: 150,
+      priceBasis: "quantity_equivalent",
+      sourcePackQuantity: 2000,
+      sourcePackUnit: "ml",
+      sourcePackLabel: "2 L",
+      sourcePriceCents: 300,
+      matchBasis: "normalized_unit",
+      matchNote: "1 L equivalent calculated from the observed 2 L pack.",
+    };
+    dataset.selectedProducts = [
+      {
+        itemId: dataset.items[0].id,
+        storeId: dataset.stores[0].id,
+        productCode: dataset.observations[0].productCode!,
+        decision: "Selected the lowest latest normalized regular price.",
+      },
+    ];
+    expect(validateDataset(dataset).success).toBe(true);
+    expect(select(dataset).observation?.priceCents).toBe(150);
+    dataset.observations[0].priceCents = 151;
+    expect(validateDataset(dataset).success).toBe(false);
+    expect(select(dataset).status).toBe("missing");
+  });
 });
 describe("calendar dates", () => {
   it("checks real calendar dates, leap years and day-only age", () => {
